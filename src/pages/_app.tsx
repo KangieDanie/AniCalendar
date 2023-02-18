@@ -6,6 +6,7 @@ import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../apolloClient";
+import { Analytics } from "@vercel/analytics/react";
 
 const overpass = Overpass({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -21,6 +22,7 @@ export default function App({
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
         <Component {...pageProps} className={overpass.className} />
+        <Analytics />
       </SessionProvider>
     </ApolloProvider>
   );
