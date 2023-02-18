@@ -2,6 +2,7 @@ import styles from "@/styles/Home.module.css";
 import * as React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { client } from "@/apolloClient";
 const Header: React.FC = () => {
   const { data: session } = useSession();
 
@@ -35,16 +36,16 @@ const Header: React.FC = () => {
               <br />
               <strong>{session.user.name}</strong>
             </span>
-            <a
-              href={`/api/auth/signout`}
+            {/* href={`/api/auth/signout`} */}
+            <button
               className={styles.signin_button}
-              onClick={(e) => {
-                e.preventDefault();
-                signOut();
+              onClick={() => {
+                signOut({});
+                client.resetStore();
               }}
             >
               Sign out
-            </a>
+            </button>
           </div>
         </>
       )}
