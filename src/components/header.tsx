@@ -86,15 +86,6 @@ const Header: React.FC = () => {
                 </Tooltip>
               </>
             )}
-
-            {/* <button
-              className={styles.button}
-              onClick={() => {
-                signOut({});
-                client.resetStore();
-              }}>
-              Sign out
-            </button> */}
           </div>
         </>
       )}

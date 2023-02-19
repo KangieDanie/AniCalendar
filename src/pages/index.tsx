@@ -29,7 +29,9 @@ export default function Home() {
       <main className={styles.main}>
         {!session && (
           <>
-            <h1>Sign in to view your calendar.</h1>
+            <div className={styles.container}>
+              <h2 className={styles.title}>Sign in to view your calendar.</h2>
+            </div>
           </>
         )}
         {session?.user && (

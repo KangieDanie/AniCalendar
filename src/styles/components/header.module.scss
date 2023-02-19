@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .avatar {
   vertical-align: middle;
   width: 50px;
@@ -8,18 +10,34 @@
   border: 1px solid rgba(255, 255, 255, 0.411);
   padding: 5px;
 }
+@include sm() {
+  .nav {
+    background-color: var(--header-background-color);
+    color: var(--foreground-text-color);
+    height: 100px;
+    width: 100%;
+    padding-top: 40px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 5em;
+    align-items: center;
+  }
+}
 
-.nav {
-  background-color: var(--header-background-color);
-  color: var(--foreground-text-color);
-  height: 150px;
-  width: 100%;
-  padding-top: 40px;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 2em 5em;
-  align-items: center;
+@include lg() {
+  .nav {
+    background-color: var(--header-background-color);
+    color: var(--foreground-text-color);
+    height: 150px;
+    width: 100%;
+    padding-top: 40px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 2em 5em;
+    align-items: center;
+  }
 }
 
 .title {

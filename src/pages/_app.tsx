@@ -13,7 +13,6 @@ import { Analytics } from "@vercel/analytics/react";
 
 // Styles
 import "@/styles/globals.scss";
-import "@/styles/components/tooltip.scss";
 
 import { NextUIProvider } from "@nextui-org/react";
 
