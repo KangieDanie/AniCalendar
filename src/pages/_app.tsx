@@ -15,6 +15,8 @@ import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.scss";
 import "@/styles/components/tooltip.scss";
 
+import { NextUIProvider } from "@nextui-org/react";
+
 const overpass = Overpass({
   weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal"],
@@ -25,8 +27,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
-        <Component {...pageProps} className={overpass.className} />
-        <Analytics />
+        <NextUIProvider>
+          <Component {...pageProps} className={overpass.className} />
+          <Analytics />
+        </NextUIProvider>
       </SessionProvider>
     </ApolloProvider>
   );
