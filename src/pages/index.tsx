@@ -1,13 +1,19 @@
-import Head from "next/head";
-import styles from "@/styles/Home.module.css";
-import { useSession } from "next-auth/react";
 import * as React from "react";
+
+// Next.js
+import Head from "next/head";
+import { useSession } from "next-auth/react";
+
+// Modules
 import dayjs from "dayjs";
-import { CalendarButtons, Calendar, Header } from "@/components";
+import { CalendarButtons, Calendar, Header, Footer } from "@/components";
+
+// Styles
+import styles from "@/styles/Home.module.css";
 
 export default function Home() {
   const { data: session } = useSession();
-  const domEl: any = React.useRef<HTMLInputElement>();
+  const refEl: any = React.useRef<HTMLInputElement>();
   const [year, setYear] = React.useState<string>(dayjs().format("YYYY"));
   const [month, setMonth] = React.useState<string>(dayjs().format("M"));
 
@@ -28,18 +34,13 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            <CalendarButtons
-              refOne={domEl}
-              year={year}
-              month={month}
-              setMonth={setMonth}
-              setYear={setYear}
-            />
+            <CalendarButtons refElement={refEl} year={year} month={month} setMonth={setMonth} setYear={setYear} />
 
-            <Calendar refOne={domEl} year={year} month={month} />
+            <Calendar refElement={refEl} year={year} month={month} />
           </>
         )}
       </main>
+      <Footer />
     </>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "anicalendar",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "KangieDanie",
   "private": true,
   "scripts": {
@@ -26,7 +26,11 @@
     "next-auth": "^4.19.2",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.5",
-    "use-react-screenshot": "^3.0.0"
+    "react-tooltip": "^5.8.1",
+    "reactjs-popup": "^2.0.5",
+    "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "sass": "^1.58.3"
   }
 }

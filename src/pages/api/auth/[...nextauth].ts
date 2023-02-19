@@ -1,8 +1,11 @@
-import { client } from "@/apolloClient";
-import { GET_CURRENT_USER } from "@/queries";
+// Next.js
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { NextAuthOptionsCallback } from "types/next-auth";
+
+// GraphQL
+import { client } from "@/apolloClient";
+import { GET_CURRENT_USER } from "@/queries";
 
 export const authOptions: NextAuthOptionsCallback = (req, res) => {
   return {
@@ -55,7 +58,7 @@ export const authOptions: NextAuthOptionsCallback = (req, res) => {
     },
     callbacks: {
       session: async ({ session, token }) => {
-        console.log(session);
+        //console.log(session);
 
         if (session?.user) {
           session.user.id = token.sub;

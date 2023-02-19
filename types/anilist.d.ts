@@ -6,6 +6,7 @@ type Activity = {
   user: string;
   status: string;
   progress: string;
+  banner: string;
 };
 
 type CalendarDay = {

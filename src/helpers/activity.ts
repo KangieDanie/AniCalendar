@@ -1,10 +1,7 @@
 import dayjs from "dayjs";
 
 const parseActivities = (activities: any): Activity[] => {
-  const watchedActivities = activities.Page.activities.filter(
-    (ac: { status: string }): any =>
-      ac.status === "watched episode" || ac.status === "completed"
-  );
+  const watchedActivities = activities.Page.activities.filter((ac: { status: string }): any => ac.status === "watched episode" || ac.status === "completed");
 
   let activityList: Activity[] = [];
 
@@ -17,6 +14,7 @@ const parseActivities = (activities: any): Activity[] => {
       user: ac.user.name,
       status: ac.status,
       progress: ac.progress,
+      banner: ac.media.bannerImage,
     });
   });
 
@@ -33,7 +31,7 @@ const groupActivitiesByDate = (activities: Activity[]): any => {
     return group;
   }, {});
 
-  console.log(dateGroup);
+  //console.log(dateGroup);
   return dateGroup;
 };
 
