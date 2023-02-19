@@ -10,39 +10,53 @@
   border: 1px solid rgba(255, 255, 255, 0.411);
   padding: 5px;
 }
-@include sm() {
-  .nav {
-    background-color: var(--header-background-color);
-    color: var(--foreground-text-color);
-    height: 100px;
-    width: 100%;
-    padding-top: 40px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 2em 5em;
-    align-items: center;
-  }
-}
 
-@include lg() {
-  .nav {
-    background-color: var(--header-background-color);
-    color: var(--foreground-text-color);
+.nav {
+  background-color: var(--header-background-color);
+  color: var(--foreground-text-color);
+  height: 150px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 5em;
+  align-items: center;
+
+  @include responsive(smartphone-portrait) {
+    height: 100px;
+    padding: 1em 1em;
+  }
+
+  @include responsive(laptop) {
     height: 150px;
-    width: 100%;
-    padding-top: 40px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 2em 5em;
-    align-items: center;
   }
 }
 
 .title {
   color: var(--foreground-text-color);
   font-weight: bold;
+  text-align: left;
+  font-size: 2.5em;
+  margin-bottom: 0;
+  @include responsive(smartphone-portrait) {
+    display: none;
+  }
+}
+
+.sub {
+  color: var(--foreground-text-color);
+  font-weight: 600;
+  text-align: left;
+  @include responsive(smartphone-portrait) {
+    display: none;
+  }
+}
+
+.text {
+  margin-left: 10px;
+  @include responsive(smartphone-portrait) {
+    display: none;
+  }
 }
 
 .button {
@@ -56,6 +70,11 @@
   transition: all 0.2s ease;
   margin: 0 1em;
   text-align: center;
+
+  @include responsive(smartphone-portrait) {
+    width: 120px;
+    padding: 10px;
+  }
 }
 
 .button:hover {
@@ -73,27 +92,6 @@
 .container {
   display: flex;
   align-items: center;
-}
-
-.popup-content {
-  margin: auto;
-  background: rgb(0, 0, 0);
-  width: 50%;
-  padding: 5px;
-}
-.popup-arrow {
-  color: rgb(255, 255, 255);
-}
-[role="tooltip"].popup-content {
-  width: 200px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
-}
-
-.popup-overlay {
-  background: rgba(0, 0, 0, 0.5);
-}
-[data-popup="tooltip"].popup-overlay {
-  background: transparent;
 }
 
 .item {
@@ -115,4 +113,11 @@
 .menu {
   display: flex;
   flex-direction: column;
+}
+
+.logo {
+  @include responsive(smartphone-portrait) {
+    width: 60%;
+    height: 60%;
+  }
 }

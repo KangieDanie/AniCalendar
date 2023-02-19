@@ -14,6 +14,7 @@ import { Analytics } from "@vercel/analytics/react";
 // Styles
 import "@/styles/globals.scss";
 
+// Modules
 import { NextUIProvider } from "@nextui-org/react";
 
 const overpass = Overpass({
@@ -22,7 +23,10 @@ const overpass = Overpass({
   subsets: ["latin"],
 });
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>

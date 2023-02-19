@@ -1,0 +1,26 @@
+@import "./mixins";
+
+.main {
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 6rem;
+  min-height: calc(100vh - 125px);
+  background-color: #0b1622;
+
+  @include responsive(smartphone-portrait) {
+    padding: 1em 1.5em;
+  }
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: white;
+  font-weight: 600;
+}

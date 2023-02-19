@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .footer {
   background-color: var(--header-background-color);
   color: var(--foreground-text-color);
@@ -9,6 +11,15 @@
   justify-content: center;
   padding: 2em 5em;
   align-items: center;
+
+  h5 {
+    margin-bottom: 0;
+  }
+
+  @include responsive(smartphone-portrait) {
+    height: 70px;
+    padding: 1em 1em;
+  }
 }
 
 .anilist {

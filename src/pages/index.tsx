@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { CalendarButtons, Calendar, Header, Footer } from "@/components";
 
 // Styles
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Home.module.scss";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -36,7 +36,13 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            <CalendarButtons refElement={refEl} year={year} month={month} setMonth={setMonth} setYear={setYear} />
+            <CalendarButtons
+              refElement={refEl}
+              year={year}
+              month={month}
+              setMonth={setMonth}
+              setYear={setYear}
+            />
 
             <Calendar refElement={refEl} year={year} month={month} />
           </>

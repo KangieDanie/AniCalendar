@@ -1,34 +1,30 @@
-// Small devices (landscape phones, 576px and up)
-@mixin sm() {
-  @media (min-width: 576px) {
-    @content;
+@mixin responsive($breakpoint) {
+  /*
+      https://gist.github.com/yactouat/d575f387313250eb30d2781e52b87360
+  */
+  @if $breakpoint == smartphone-portrait {
+    @media only screen and (max-width: 575.98px) {
+      @content;
+    }
   }
-}
-
-// Medium devices (tablets, 768px and up)
-@mixin md() {
-  @media (min-width: 768px) {
-    @content;
+  @if $breakpoint == smartphone-landscape {
+    @media only screen and (min-width: 575.99px) and (max-width: 767.98px) {
+      @content;
+    }
   }
-}
-
-// Large devices (desktops, 992px and up)
-@mixin lg() {
-  @media (min-width: 992px) {
-    @content;
+  @if $breakpoint == tablet {
+    @media only screen and (min-width: 767.99px) and (max-width: 1199.97px) {
+      @content;
+    }
   }
-}
-
-// X-Large devices (large desktops, 1200px and up)
-@mixin x-lg() {
-  @media (min-width: 1200px) {
-    @content;
+  @if $breakpoint == laptop {
+    @media only screen and (min-width: 1199.98px) and (max-width: 1399.98px) {
+      @content;
+    }
   }
-}
-
-// XX-Large devices (larger desktops, 1400px and up)
-@mixin xx-lg() {
-  @media (min-width: 1400px) {
-    @content;
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1399.99px) {
+      @content;
+    }
   }
 }

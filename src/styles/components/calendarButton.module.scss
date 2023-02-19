@@ -1,21 +1,32 @@
-.main {
+@import "../mixins";
+
+.date {
+  color: white;
+  font-weight: 700;
+}
+
+.container {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2em 6rem;
-  min-height: calc(100vh - 125px);
-  background-color: #0b1622;
+  margin: 1em 0;
 }
 
-.date_switch_container {
+.sub {
   display: flex;
-  justify-content: space-between;
-  margin: 2em 0;
+  margin: 0 0.5em;
 }
 
-.datebutton_switch_container {
-  display: flex;
+.camera {
+  display: block;
+  margin-right: 10px;
+  color: #9fadbd;
 }
 
+.cog {
+  margin-left: 10px;
+  color: #9fadbd;
+}
 
 .icon_button {
   display: block;
@@ -36,26 +47,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 .switch_button:hover {
   background-color: #e25b1d;
 }
 
-
 .switch_container {
   display: flex;
-}
-
-.container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.title {
-  color: white;
-  font-weight: 600;
 }
