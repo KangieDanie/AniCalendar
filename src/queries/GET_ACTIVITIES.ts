@@ -10,7 +10,13 @@ export default gql`
         lastPage
         hasNextPage
       }
-      activities(userId: $userId, type: ANIME_LIST, sort: [ID_DESC], createdAt_lesser: $dateLess, createdAt_greater: $dateGreater) {
+      activities(
+        userId: $userId
+        type: ANIME_LIST
+        sort: [ID_DESC]
+        createdAt_lesser: $dateLess
+        createdAt_greater: $dateGreater
+      ) {
         ... on ListActivity {
           type
           status
@@ -26,6 +32,7 @@ export default gql`
           media {
             id
             bannerImage
+            format
             title {
               userPreferred
             }

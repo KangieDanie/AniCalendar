@@ -8,6 +8,7 @@ type Activity = {
   progress: string;
   banner: string;
   coverImage: CoverImage;
+  format: string;
 };
 
 type CalendarDay = {

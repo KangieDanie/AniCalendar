@@ -10,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 1em 0;
+  z-index: 300;
 }
 
 .sub {
@@ -56,4 +57,13 @@
 
 .switch_container {
   display: flex;
+}
+
+.sticky {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background-color: #151f2e;
+  margin-top: 0;
 }

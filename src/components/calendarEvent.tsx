@@ -3,19 +3,25 @@ import * as React from "react";
 import styles from "@/styles/components/calendarEvent.module.scss";
 
 const CalendarEvent: React.FC<ICalendarEventProps> = ({ activity, total }) => {
-  const [height, setHeight] = React.useState<string>("60");
+  const [height, setHeight] = React.useState<string>("60px");
 
   const addCoverImage = (): React.CSSProperties => {
     return {
-      backgroundImage: `linear-gradient(rgb(11 22 34), rgb(11 22 34 / 86%)), url("${activity.coverImage.large}")`,
+      backgroundImage: `linear-gradient(rgb(11 22 34), rgb(11 22 34 / 70%)), url("${activity.coverImage.large}")`,
       height: getHeight(),
       borderColor: checkIfEpisodeOne(),
+      backgroundPosition: "center",
+      backgroundSize: "cover",
     };
   };
 
   const checkIfEpisodeOne = () => {
     if (activity.progress) {
-      if (activity.progress.toString().includes("1 -") || activity.progress.toString() === "1") return "purple";
+      if (
+        activity.progress.toString().includes("1 -") ||
+        activity.progress.toString() === "1"
+      )
+        return "purple";
     } else if (activity.status) {
       if (activity.status === "completed") return "orange";
     }
@@ -38,8 +44,18 @@ const CalendarEvent: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   };
 
   return (
-    <a href={activity.url} target="_blank" rel="noopener noreferrer" onMouseEnter={() => increaseHeight()} onMouseLeave={() => decreaseHeight()} style={addCoverImage()} className={styles.event}>
-      {activity.anime_title} {activity.progress && `(EP ${activity.progress})`}
+    <a
+      href={activity.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => increaseHeight()}
+      onMouseLeave={() => decreaseHeight()}
+      style={addCoverImage()}
+      className={styles.event}
+    >
+      {activity.anime_title} {activity.format === "MOVIE" && "(Movie)"}
+      {activity.progress && `(EP ${activity.progress})`}{" "}
+      {activity.status === "completed" && "(Completed)"}
     </a>
   );
 };
