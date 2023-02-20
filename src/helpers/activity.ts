@@ -15,6 +15,7 @@ const parseActivities = (activities: any): Activity[] => {
       status: ac.status,
       progress: ac.progress,
       banner: ac.media.bannerImage,
+      coverImage: ac.media.coverImage,
     });
   });
 

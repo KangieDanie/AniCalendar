@@ -7,10 +7,18 @@ type Activity = {
   status: string;
   progress: string;
   banner: string;
+  coverImage: CoverImage;
 };
 
 type CalendarDay = {
   date: string;
   dayOfMonth: number;
   isCurrentMonth: boolean;
+};
+
+type CoverImage = {
+  extraLarge: string;
+  large: string;
+  medium: string;
+  color: string;
 };

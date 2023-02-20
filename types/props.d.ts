@@ -11,3 +11,8 @@ interface ICalendarButtonsProps {
   setYear: React.Dispatch<React.SetStateAction<string>>;
   setMonth: React.Dispatch<React.SetStateAction<string>>;
 }
+
+interface ICalendarEventProps {
+  activity: Activity;
+  total: number;
+}
