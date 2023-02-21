@@ -6,18 +6,25 @@ import styles from "@/styles/components/calendarButton.module.scss";
 // Modules
 import dayjs from "dayjs";
 import * as htmlToImage from "html-to-image";
-import { Tooltip, Modal, Switch } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 import Sticky from "react-stickynode";
 
 // Icons
-import { CameraIcon, Cog8ToothIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { CameraIcon, Cog8ToothIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
+
+import html2canvas from "html2canvas";
 
 const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, month, setYear, setMonth, setVisible }) => {
   const handler = () => setVisible(true);
 
   const downloadImage = async (): Promise<void> => {
     if (refElement) {
-      const dataUrl = await htmlToImage.toPng(refElement.current);
+      const dataUrl = await htmlToImage.toPng(refElement.current, {
+        fetchRequestInit: {
+          mode: "no-cors",
+        },
+      });
+
       const link = document.createElement("a");
       link.download = `calendar-${year}-${month}.png`;
       link.href = dataUrl;
@@ -49,10 +56,56 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
     }
   };
 
+  const previousYear = (): void => {
+    let yearInt = parseInt(year);
+    let newYear = yearInt - 1;
+    setYear(newYear.toString());
+  };
+
+  const nextYear = (): void => {
+    let yearInt = parseInt(year);
+    let newYear = yearInt + 1;
+    setYear(newYear.toString());
+  };
+
   return (
     <Sticky enabled={true} top={50} innerZ={300} innerActiveClass={styles.sticky}>
       <div className={styles.container}>
+        <Tooltip
+          css={{
+            color: "#9fadbd",
+            fontSize: "$sm",
+            width: "120px",
+            backgroundColor: "#151f2e",
+            zIndex: "300",
+            display: "flex",
+            justifyContent: "center",
+          }}
+          hideArrow
+          shadow={false}
+          content={"Next Month"}>
+          <a className={styles.cog} onClick={() => nextMonth()}>
+            <ChevronRightIcon width={25} />
+          </a>
+        </Tooltip>
         <div className={styles.sub}>
+          <Tooltip
+            css={{
+              color: "#9fadbd",
+              fontSize: "$sm",
+              width: "140px",
+              backgroundColor: "#151f2e",
+              zIndex: "300",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            hideArrow
+            shadow={false}
+            content={"Previous Year"}>
+            <a className={styles.cog} onClick={() => previousYear()}>
+              <ChevronDoubleLeftIcon width={25} />
+            </a>
+          </Tooltip>
           <Tooltip
             css={{
               color: "#9fadbd",
@@ -70,6 +123,9 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
               <ChevronLeftIcon width={25} />
             </a>
           </Tooltip>
+          <h2 className={styles.date}>
+            {dayjs("2023-" + month + "-01").format("MMMM")} - {year}
+          </h2>
           <Tooltip
             css={{
               color: "#9fadbd",
@@ -87,10 +143,25 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
               <ChevronRightIcon width={25} />
             </a>
           </Tooltip>
+          <Tooltip
+            css={{
+              color: "#9fadbd",
+              fontSize: "$sm",
+              width: "120px",
+              backgroundColor: "#151f2e",
+              zIndex: "300",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            hideArrow
+            shadow={false}
+            content={"Next Year"}>
+            <a className={styles.cog} onClick={() => nextYear()}>
+              <ChevronDoubleRightIcon width={25} />
+            </a>
+          </Tooltip>
         </div>
-        <h2 className={styles.date}>
-          {dayjs("2023-" + month + "-01").format("MMMM")} - {year}
-        </h2>
+
         <div className={styles.sub}>
           <Tooltip
             css={{

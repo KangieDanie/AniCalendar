@@ -10,7 +10,7 @@
   text-overflow: ellipsis;
   white-space: normal;
   overflow: hidden;
-  width: 220px;
+  width: 100%;
   height: 60px;
   font-size: 1em;
   display: block;
@@ -18,12 +18,13 @@
   background-position: center;
   background-size: cover;
   border: 3px solid #0b1622;
-
+  position: relative;
   @include responsive(smartphone-portrait) {
     height: 100% !important;
     min-width: 220px !important;
     margin: 10px 10px;
     font-size: 0.9em;
+    width: 220px;
   }
 
   @include responsive(smartphone-landscape) {
@@ -31,6 +32,7 @@
     min-width: 200px !important;
     margin: 10px 10px;
     font-size: 0.9em;
+    width: 220px;
   }
 
   @include responsive(tablet) {
@@ -38,11 +40,37 @@
     min-width: 200px !important;
     margin: 10px 10px;
     font-size: 0.9em;
+    width: 220px;
   }
-  @include responsive(laptop) {
-    height: 100% !important;
-    min-width: 200px !important;
-    margin: 10px 10px;
-    font-size: 0.9em;
-  }
+  // @include responsive(laptop) {
+  //   height: 100% !important;
+  //   min-width: 200px !important;
+  //   margin: 10px 10px;
+  //   font-size: 0.9em;
+  //   width: 220px;
+  // }
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+}
+
+.overlay {
+  background: linear-gradient(rgb(11 22 34), rgb(11 22 34 / 70%));
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 15;
+}
+
+.anime {
+  z-index: 16;
+  position: relative;
 }

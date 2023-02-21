@@ -4,6 +4,7 @@
   color: white;
   font-weight: 700;
   margin-bottom: 0;
+  margin: 0 1em;
   @include responsive(smartphone-portrait) {
     font-size: 1.3em;
   }
@@ -20,6 +21,7 @@
 .sub {
   display: flex;
   margin: 0 0.5em;
+  align-items: center;
 }
 
 .camera {
@@ -29,7 +31,6 @@
 }
 
 .cog {
-  margin-left: 10px;
   color: #9fadbd;
 }
 
