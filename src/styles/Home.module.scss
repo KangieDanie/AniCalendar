@@ -10,6 +10,14 @@
   @include responsive(smartphone-portrait) {
     padding: 1em 0;
   }
+
+  @include responsive(smartphone-landscape) {
+    padding: 1em 0;
+  }
+
+  @include responsive(tablet) {
+    padding: 1em 0;
+  }
 }
 
 .container {

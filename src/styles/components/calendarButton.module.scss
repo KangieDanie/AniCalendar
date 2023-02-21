@@ -91,3 +91,21 @@
 .setting {
   margin-bottom: 0;
 }
+
+.legend {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #9fadbd;
+  font-weight: 600;
+}
+
+.desc {
+  margin-left: 10px;
+}
+
+.legends {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}

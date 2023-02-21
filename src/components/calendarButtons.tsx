@@ -110,7 +110,7 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
             </a>
           </Tooltip>
 
-          <Tooltip
+          {/* <Tooltip
             css={{
               color: "#9fadbd",
               fontSize: "$sm",
@@ -126,7 +126,21 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
             <a className={styles.cog} onClick={() => handler()}>
               <Cog8ToothIcon width={25} />
             </a>
-          </Tooltip>
+          </Tooltip> */}
+        </div>
+      </div>
+      <div className={styles.legends}>
+        <div className={styles.legend}>
+          <svg viewBox="0 0 100 100" fill="orange" width={20} xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="50" />
+          </svg>
+          <span className={styles.desc}>Completed</span>
+        </div>
+        <div className={styles.legend}>
+          <svg viewBox="0 0 100 100" fill="purple" width={20} xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="50" />
+          </svg>
+          <span className={styles.desc}>First episode</span>
         </div>
       </div>
     </Sticky>

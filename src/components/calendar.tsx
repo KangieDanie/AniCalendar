@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import styles from "@/styles/Calendar.module.scss";
+import styles from "@/styles/components/Calendar.module.scss";
 import dayjs from "dayjs";
 import * as React from "react";
 import { GET_ACTIVITIES } from "@/queries";
@@ -8,6 +8,8 @@ import { parseActivities, groupActivitiesByDate, createDaysForCurrentMonth, crea
 import { client } from "@/apolloClient";
 import { useSession } from "next-auth/react";
 import { createDaysCells, createDaysRow, createWeekDaysList } from "@/helpers/element";
+import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
+import useCheckTabletScreen from "@/hooks/useCheckTabletScreen";
 
 const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   const { data: session } = useSession();
@@ -15,7 +17,10 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   const [days, setDays] = React.useState<CalendarDay[]>([]);
   const [data, setData] = React.useState<any>();
   const [loading, setLoading] = React.useState(true);
+  const isMobile = useCheckMobileScreen();
+  const isTablet = useCheckTabletScreen();
 
+  // TODO: change to hook
   const fetchAll = async () => {
     let hasNextPage = true;
     let allResults: any;
@@ -44,11 +49,18 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
     allResults = groupActivitiesByDate(array);
     setData(allResults);
     //console.log(allResults);
-    let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(year, month);
-    let previousMonthDays: CalendarDay[] = createDaysForPreviousMonth(currentMonthDays, year, month);
-    let nextMonthDays: CalendarDay[] = createDaysForNextMonth(currentMonthDays, year, month);
 
-    setDays([...previousMonthDays, ...currentMonthDays, ...nextMonthDays]);
+    if (isMobile || isTablet) {
+      let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(year, month);
+
+      setDays([...currentMonthDays]);
+    } else {
+      let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(year, month);
+      let previousMonthDays: CalendarDay[] = createDaysForPreviousMonth(currentMonthDays, year, month);
+      let nextMonthDays: CalendarDay[] = createDaysForNextMonth(currentMonthDays, year, month);
+
+      setDays([...previousMonthDays, ...currentMonthDays, ...nextMonthDays]);
+    }
   };
 
   React.useEffect(() => {

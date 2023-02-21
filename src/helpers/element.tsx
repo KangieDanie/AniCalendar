@@ -1,5 +1,5 @@
 import CalendarEvent from "@/components/calendarEvent";
-import styles from "@/styles/Calendar.module.scss";
+import styles from "@/styles/components/Calendar.module.scss";
 import dayjs from "dayjs";
 
 const createWeekDaysList = (weekdays: string[]): JSX.Element[] => {

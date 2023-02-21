@@ -39,7 +39,6 @@ export default function Home() {
           <>
             <SettingModal setVisible={setVisible} visible={visible} />
             <CalendarButtons refElement={refEl} year={year} month={month} setMonth={setMonth} setYear={setYear} setVisible={setVisible} />
-
             <Calendar refElement={refEl} year={year} month={month} />
           </>
         )}
