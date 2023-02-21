@@ -1,0 +1,30 @@
+@mixin responsive($breakpoint) {
+  /*
+      https://gist.github.com/yactouat/d575f387313250eb30d2781e52b87360
+  */
+  @if $breakpoint == smartphone-portrait {
+    @media only screen and (max-width: 575.98px) {
+      @content;
+    }
+  }
+  @if $breakpoint == smartphone-landscape {
+    @media only screen and (min-width: 575.99px) and (max-width: 767.98px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media only screen and (min-width: 767.99px) and (max-width: 1199.97px) {
+      @content;
+    }
+  }
+  @if $breakpoint == laptop {
+    @media only screen and (min-width: 1199.98px) and (max-width: 1399.98px) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 1399.99px) {
+      @content;
+    }
+  }
+}

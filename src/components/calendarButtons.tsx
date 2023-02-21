@@ -1,25 +1,23 @@
-import styles from "@/styles/Home.module.css";
-import dayjs from "dayjs";
 import * as React from "react";
-import * as htmlToImage from "html-to-image";
 
-interface IProps {
-  refOne: any; // TO DO add type
-  year: string;
-  month: string;
-  setYear: React.Dispatch<React.SetStateAction<string>>;
-  setMonth: React.Dispatch<React.SetStateAction<string>>;
-}
-const CalendarButtons: React.FC<IProps> = ({
-  refOne,
-  year,
-  month,
-  setYear,
-  setMonth,
-}) => {
-  const downloadImage = async () => {
-    if (refOne) {
-      const dataUrl = await htmlToImage.toPng(refOne.current);
+// Styles
+import styles from "@/styles/components/calendarButton.module.scss";
+
+// Modules
+import dayjs from "dayjs";
+import * as htmlToImage from "html-to-image";
+import { Tooltip, Modal, Switch } from "@nextui-org/react";
+import Sticky from "react-stickynode";
+
+// Icons
+import { CameraIcon, Cog8ToothIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+
+const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, month, setYear, setMonth, setVisible }) => {
+  const handler = () => setVisible(true);
+
+  const downloadImage = async (): Promise<void> => {
+    if (refElement) {
+      const dataUrl = await htmlToImage.toPng(refElement.current);
       const link = document.createElement("a");
       link.download = `calendar-${year}-${month}.png`;
       link.href = dataUrl;
@@ -27,111 +25,125 @@ const CalendarButtons: React.FC<IProps> = ({
     }
   };
 
-  const previousMonth = async () => {
+  const previousMonth = (): void => {
     if (month === "1") {
       let newYear = parseInt(year) - 1;
       setYear(newYear.toString());
       setMonth("12");
     } else {
       let monthInt = parseInt(month);
-
       let newMonth = monthInt - 1;
       setMonth(newMonth.toString());
     }
   };
 
-  const nextMonth = async () => {
+  const nextMonth = (): void => {
     if (month === "12") {
       let newYear = parseInt(year) + 1;
       setYear(newYear.toString());
       setMonth("1");
     } else {
       let monthInt = parseInt(month);
-
       let newMonth = monthInt + 1;
       setMonth(newMonth.toString());
     }
   };
 
   return (
-    <div className={styles.date_switch_container}>
-      <h1>
-        {dayjs("2023-" + month + "-01").format("MMMM")} - {year}
-      </h1>
-      <div className={styles.datebutton_switch_container}>
-        <button
-          name="Previous Month"
-          onClick={() => previousMonth()}
-          className={styles.switch_button}
-        >
-          <svg
-            width={25}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className={styles.icon_button}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-            />
-          </svg>
-          Previous
-        </button>
-        <button
-          name="Next Month"
-          onClick={() => nextMonth()}
-          className={styles.switch_button}
-        >
-          Next
-          <svg
-            width={25}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className={styles.icon_button}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </button>
-        <button
-          name="Download Image"
-          onClick={() => downloadImage()}
-          className={styles.switch_button}
-        >
-          <svg
-            width={30}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className={styles.icon_button}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
-            />
-          </svg>
-          Generate Image
-        </button>
+    <Sticky enabled={true} top={50} innerZ={300} innerActiveClass={styles.sticky}>
+      <div className={styles.container}>
+        <div className={styles.sub}>
+          <Tooltip
+            css={{
+              color: "#9fadbd",
+              fontSize: "$sm",
+              width: "140px",
+              backgroundColor: "#151f2e",
+              zIndex: "300",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            hideArrow
+            shadow={false}
+            content={"Previous Month"}>
+            <a className={styles.cog} onClick={() => previousMonth()}>
+              <ChevronLeftIcon width={25} />
+            </a>
+          </Tooltip>
+          <Tooltip
+            css={{
+              color: "#9fadbd",
+              fontSize: "$sm",
+              width: "120px",
+              backgroundColor: "#151f2e",
+              zIndex: "300",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            hideArrow
+            shadow={false}
+            content={"Next Month"}>
+            <a className={styles.cog} onClick={() => nextMonth()}>
+              <ChevronRightIcon width={25} />
+            </a>
+          </Tooltip>
+        </div>
+        <h2 className={styles.date}>
+          {dayjs("2023-" + month + "-01").format("MMMM")} - {year}
+        </h2>
+        <div className={styles.sub}>
+          <Tooltip
+            css={{
+              color: "#9fadbd",
+              fontSize: "$sm",
+              width: "130px",
+              backgroundColor: "#151f2e",
+              zIndex: "300",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            hideArrow
+            shadow={false}
+            content={"Generate image"}>
+            <a className={styles.camera} onClick={() => downloadImage()}>
+              <CameraIcon width={25} />
+            </a>
+          </Tooltip>
+
+          {/* <Tooltip
+            css={{
+              color: "#9fadbd",
+              fontSize: "$sm",
+              width: "140px",
+              backgroundColor: "#151f2e",
+              zIndex: "300",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            hideArrow
+            shadow={false}
+            content={"Calendar Settings"}>
+            <a className={styles.cog} onClick={() => handler()}>
+              <Cog8ToothIcon width={25} />
+            </a>
+          </Tooltip> */}
+        </div>
       </div>
-    </div>
+      <div className={styles.legends}>
+        <div className={styles.legend}>
+          <svg viewBox="0 0 100 100" fill="orange" width={20} xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="50" />
+          </svg>
+          <span className={styles.desc}>Completed</span>
+        </div>
+        <div className={styles.legend}>
+          <svg viewBox="0 0 100 100" fill="purple" width={20} xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="50" />
+          </svg>
+          <span className={styles.desc}>First episode</span>
+        </div>
+      </div>
+    </Sticky>
   );
 };
 

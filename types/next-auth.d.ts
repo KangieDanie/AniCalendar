@@ -2,10 +2,8 @@ import NextAuth from "next-auth";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextAuthOptions } from "next-auth";
 
-type NextAuthOptionsCallback = (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => NextAuthOptions;
+type NextAuthOptionsCallback = (req: NextApiRequest, res: NextApiResponse) => NextAuthOptions;
+
 declare module "next-auth" {
   interface UserImage {
     medium: string;

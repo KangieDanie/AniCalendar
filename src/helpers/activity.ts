@@ -17,6 +17,9 @@ const parseActivities = (activities: any): Activity[] => {
       user: ac.user.name,
       status: ac.status,
       progress: ac.progress,
+      banner: ac.media.bannerImage,
+      coverImage: ac.media.coverImage,
+      format: ac.media.format,
     });
   });
 
@@ -33,7 +36,7 @@ const groupActivitiesByDate = (activities: Activity[]): any => {
     return group;
   }, {});
 
-  console.log(dateGroup);
+  //console.log(dateGroup);
   return dateGroup;
 };
 

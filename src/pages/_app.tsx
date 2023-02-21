@@ -1,12 +1,21 @@
-import "@/styles/globals.css";
+// Next.js
 import { SessionProvider } from "next-auth/react";
-import { Overpass } from "@next/font/google";
-
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
+import { Overpass } from "@next/font/google";
+
+// GraphQL
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../apolloClient";
+
+// Vercel
 import { Analytics } from "@vercel/analytics/react";
+
+// Styles
+import "@/styles/globals.scss";
+
+// Modules
+import { NextUIProvider } from "@nextui-org/react";
 
 const overpass = Overpass({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -21,8 +30,10 @@ export default function App({
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
-        <Component {...pageProps} className={overpass.className} />
-        <Analytics />
+        <NextUIProvider>
+          <Component {...pageProps} className={overpass.className} />
+          <Analytics />
+        </NextUIProvider>
       </SessionProvider>
     </ApolloProvider>
   );

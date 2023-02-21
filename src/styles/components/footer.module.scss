@@ -1,0 +1,27 @@
+@import "../mixins";
+
+.footer {
+  background-color: var(--header-background-color);
+  color: var(--foreground-text-color);
+  height: 75px;
+  width: 100%;
+  padding-top: 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 1em 5em;
+  align-items: center;
+
+  h5 {
+    margin-bottom: 0;
+  }
+
+  @include responsive(smartphone-portrait) {
+    height: 70px;
+    padding: 1em 1em;
+  }
+}
+
+.anilist {
+  color: var(--foreground-text-highlight);
+}

@@ -1,7 +1,23 @@
+@import "../mixins";
+
 .calendar_month {
   position: relative;
-  background-color: var(--grey-200);
-  border: solid 1px var(--grey-200);
+
+  @include responsive(smartphone-portrait) {
+    display: none;
+  }
+
+  @include responsive(smartphone-landscape) {
+    display: none;
+  }
+
+  @include responsive(tablet) {
+    display: none;
+  }
+
+  @include responsive(laptop) {
+    display: none;
+  }
 }
 
 .calendar-month-header {
@@ -28,7 +44,7 @@
 }
 
 .day_of_week {
-  color: rgb(159, 173, 189);
+  color: #9fadbd;
   font-size: 18px;
   background-color: rgb(21, 31, 46);
   padding-bottom: 25px;
@@ -58,11 +74,11 @@
 
 .calendar_day {
   position: relative;
-  min-height: 180px;
+  min-height: 270px;
   font-size: 16px;
   background-color: #151f2e;
   color: rgb(159, 173, 189);
-  padding-top: 35px;
+  padding-top: 25px;
   padding-bottom: 5px;
   padding-left: 10px;
   padding-right: 10px;
@@ -168,5 +184,61 @@
   }
   75% {
     box-shadow: #ff69b400 0 0 0 16px;
+  }
+}
+
+.list {
+  height: 120px;
+  display: flex;
+  margin: 0;
+  position: relative;
+}
+
+.day {
+  color: white;
+  width: 90px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-right: 0;
+  background-color: #151f2e;
+}
+
+.events {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  border: 1px solid #151f2e;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-basis: auto;
+  padding: 5px 5px;
+  position: relative;
+}
+
+.mobile {
+  display: none;
+
+  @include responsive(smartphone-portrait) {
+    display: block;
+  }
+
+  @include responsive(smartphone-landscape) {
+    display: block;
+  }
+
+  @include responsive(tablet) {
+    display: block;
+  }
+  @include responsive(laptop) {
+    display: block;
   }
 }

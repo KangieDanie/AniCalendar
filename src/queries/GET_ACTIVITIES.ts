@@ -31,6 +31,8 @@ export default gql`
           }
           media {
             id
+            bannerImage
+            format
             title {
               userPreferred
             }

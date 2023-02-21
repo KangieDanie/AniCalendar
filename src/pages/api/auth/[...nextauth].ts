@@ -1,8 +1,11 @@
-import { client } from "@/apolloClient";
-import { GET_CURRENT_USER } from "@/queries";
+// Next.js
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { NextAuthOptionsCallback } from "types/next-auth";
+
+// GraphQL
+import { client } from "@/apolloClient";
+import { GET_CURRENT_USER } from "@/queries";
 
 export const authOptions: NextAuthOptionsCallback = (req, res) => {
   return {
@@ -50,13 +53,9 @@ export const authOptions: NextAuthOptionsCallback = (req, res) => {
     session: {
       //Sets the session to use JSON Web Token
       strategy: "jwt",
-      //Sets the max idle time before token expires in seconds - Currently 1hr
-      maxAge: 3600,
     },
     callbacks: {
       session: async ({ session, token }) => {
-        console.log(session);
-
         if (session?.user) {
           session.user.id = token.sub;
         }
