@@ -18,7 +18,7 @@ const CalendarEvent: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   const checkIfEpisodeOne = () => {
     if (activity.progress) {
       if (
-        activity.progress.toString().includes("1 -") ||
+        activity.progress.toString().startsWith("1 -") ||
         activity.progress.toString() === "1"
       )
         return "purple";
