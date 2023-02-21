@@ -1,21 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import styles from "@/styles/Calendar.module.css";
+import styles from "@/styles/Calendar.module.scss";
 import dayjs from "dayjs";
 import * as React from "react";
 import { GET_ACTIVITIES } from "@/queries";
-import {
-  parseActivities,
-  groupActivitiesByDate,
-  createDaysForCurrentMonth,
-  createDaysForNextMonth,
-  createDaysForPreviousMonth,
-  getNumberOfDaysInMonth,
-  WEEK_NAMES,
-} from "@/helpers";
+import { parseActivities, groupActivitiesByDate, createDaysForCurrentMonth, createDaysForNextMonth, createDaysForPreviousMonth, getNumberOfDaysInMonth, WEEK_NAMES } from "@/helpers";
 
 import { client } from "@/apolloClient";
 import { useSession } from "next-auth/react";
-import { createDaysCells, createWeekDaysList } from "@/helpers/element";
+import { createDaysCells, createDaysRow, createWeekDaysList } from "@/helpers/element";
 
 const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   const { data: session } = useSession();
@@ -28,9 +20,7 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
     let hasNextPage = true;
     let allResults: any;
     let page = 1;
-    let dateLess = dayjs(
-      `${year}-${month}-${getNumberOfDaysInMonth(year, month) + 1}`
-    ).unix();
+    let dateLess = dayjs(`${year}-${month}-${getNumberOfDaysInMonth(year, month) + 1}`).unix();
     let dateGreater = dayjs(`${year}-${month}-${1}`).unix();
     let userId = null;
     let array: Activity[] = [];
@@ -54,20 +44,9 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
     allResults = groupActivitiesByDate(array);
     setData(allResults);
     //console.log(allResults);
-    let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(
-      year,
-      month
-    );
-    let previousMonthDays: CalendarDay[] = createDaysForPreviousMonth(
-      currentMonthDays,
-      year,
-      month
-    );
-    let nextMonthDays: CalendarDay[] = createDaysForNextMonth(
-      currentMonthDays,
-      year,
-      month
-    );
+    let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(year, month);
+    let previousMonthDays: CalendarDay[] = createDaysForPreviousMonth(currentMonthDays, year, month);
+    let nextMonthDays: CalendarDay[] = createDaysForNextMonth(currentMonthDays, year, month);
 
     setDays([...previousMonthDays, ...currentMonthDays, ...nextMonthDays]);
   };
@@ -77,19 +56,22 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   }, [year, month]);
 
   return (
-    <div className={styles.calendar_month} ref={refElement}>
-      <ol id="days-of-week" className={styles.day_of_week}>
-        {createWeekDaysList(weekdays)}
-      </ol>
-
-      {loading && <span className={styles.live}></span>}
-
-      {!loading && (
-        <ol id="calendar-days" className={styles.days_grid}>
-          {days.length > 0 && createDaysCells(data, days)}
+    <>
+      <div className={styles.calendar_month} ref={refElement}>
+        <ol id="days-of-week" className={styles.day_of_week}>
+          {createWeekDaysList(weekdays)}
         </ol>
-      )}
-    </div>
+
+        {loading && <span className={styles.live}></span>}
+
+        {!loading && (
+          <ol id="calendar-days" className={styles.days_grid}>
+            {days.length > 0 && createDaysCells(data, days)}
+          </ol>
+        )}
+      </div>
+      <div className={styles.mobile}>{days.length > 0 && createDaysRow(data, days)}</div>
+    </>
   );
 };
 

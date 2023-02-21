@@ -8,7 +8,7 @@
   background-color: #0b1622;
 
   @include responsive(smartphone-portrait) {
-    padding: 1em 1.5em;
+    padding: 1em 0;
   }
 }
 
@@ -23,4 +23,28 @@
 .title {
   color: white;
   font-weight: 600;
+  text-align: center;
+}
+
+.list {
+  height: 120px;
+  display: flex;
+  margin: 0;
+}
+
+.day {
+  color: white;
+  width: 90px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-right: 20px;
+  background-color: #151f2e;
+}
+
+.events {
+  width: 100%;
+  background-color: antiquewhite;
 }

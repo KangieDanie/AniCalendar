@@ -1,8 +1,7 @@
 @import "../mixins";
 
 .event {
-  background-image: linear-gradient(rgb(11 22 34), rgb(11 22 34 / 50%)),
-    url("https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg");
+  background-image: linear-gradient(rgb(11 22 34), rgb(11 22 34 / 50%)), url("https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg");
   border-radius: 5px;
   padding: 5px 15px;
   color: #fff;
@@ -19,4 +18,10 @@
   background-position: center;
   background-size: cover;
   border: 3px solid #0b1622;
+
+  @include responsive(smartphone-portrait) {
+    height: 100% !important;
+    min-width: 250px !important;
+    margin: 10px 10px;
+  }
 }

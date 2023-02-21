@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 
 // Modules
 import dayjs from "dayjs";
-import { CalendarButtons, Calendar, Header, Footer } from "@/components";
+import { CalendarButtons, Calendar, Header, Footer, SettingModal } from "@/components";
 
 // Styles
 import styles from "@/styles/Home.module.scss";
@@ -16,6 +16,7 @@ export default function Home() {
   const refEl: any = React.useRef<HTMLInputElement>();
   const [year, setYear] = React.useState<string>(dayjs().format("YYYY"));
   const [month, setMonth] = React.useState<string>(dayjs().format("M"));
+  const [visible, setVisible] = React.useState<boolean>(false);
 
   return (
     <>
@@ -36,13 +37,8 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            <CalendarButtons
-              refElement={refEl}
-              year={year}
-              month={month}
-              setMonth={setMonth}
-              setYear={setYear}
-            />
+            <SettingModal setVisible={setVisible} visible={visible} />
+            <CalendarButtons refElement={refEl} year={year} month={month} setMonth={setMonth} setYear={setYear} setVisible={setVisible} />
 
             <Calendar refElement={refEl} year={year} month={month} />
           </>

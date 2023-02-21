@@ -1,7 +1,11 @@
+@import "./mixins";
+
 .calendar_month {
   position: relative;
-  background-color: var(--grey-200);
-  border: solid 1px var(--grey-200);
+
+  @include responsive(smartphone-portrait) {
+    display: none;
+  }
 }
 
 .calendar-month-header {
@@ -168,5 +172,45 @@
   }
   75% {
     box-shadow: #ff69b400 0 0 0 16px;
+  }
+}
+
+.list {
+  height: 120px;
+  display: flex;
+  margin: 0;
+}
+
+.day {
+  color: white;
+  width: 90px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-right: 0;
+  background-color: #151f2e;
+}
+
+.events {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  border: 1px solid #151f2e;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-basis: auto;
+  padding: 5px 5px;
+}
+
+.mobile {
+  display: none;
+  @include responsive(smartphone-portrait) {
+    display: block;
   }
 }
