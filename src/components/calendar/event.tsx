@@ -1,30 +1,31 @@
 import * as React from "react";
 
-import styles from "@/styles/components/calendarEvent.module.scss";
+//Next.js
 import Image from "next/image";
 
-const CalendarEvent: React.FC<ICalendarEventProps> = ({ activity, total }) => {
+// Styles
+import styles from "@/styles/components/calendarEvent.module.scss";
+
+const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   const [height, setHeight] = React.useState<string>("60px");
 
-  const addCoverImage = (): React.CSSProperties => {
+  const addCSS = (): React.CSSProperties => {
     return {
-      // backgroundImage: `linear-gradient(rgb(11 22 34), rgb(11 22 34 / 70%)), url("${activity.coverImage.large}")`,
       height: getHeight(),
-      borderColor: checkIfEpisodeOne(),
-      backgroundPosition: "center",
-      backgroundSize: "cover",
+      borderColor: checkSettings(),
     };
   };
 
-  const checkIfEpisodeOne = () => {
+  const checkSettings = (): string => {
     if (activity.progress) {
       if (activity.progress.toString().startsWith("1 -") || activity.progress.toString() === "1") return "purple";
     } else if (activity.status) {
       if (activity.status === "completed") return "orange";
     }
+    return "";
   };
 
-  const getHeight = () => {
+  const getHeight = (): string => {
     if (total == 1) {
       return "90%";
     } else if (total == 2) {
@@ -32,18 +33,18 @@ const CalendarEvent: React.FC<ICalendarEventProps> = ({ activity, total }) => {
     } else return height;
   };
 
-  const increaseHeight = () => {
+  const increaseHeight = (): void => {
     if (total >= 3) setHeight("90px");
   };
 
-  const decreaseHeight = () => {
+  const decreaseHeight = (): void => {
     if (total >= 3) setHeight("60px");
   };
 
   return (
-    <a href={activity.url} target="_blank" rel="noopener noreferrer" onMouseEnter={() => increaseHeight()} onMouseLeave={() => decreaseHeight()} style={addCoverImage()} className={styles.event}>
+    <a href={activity.url} target="_blank" rel="noopener noreferrer" onMouseEnter={() => increaseHeight()} onMouseLeave={() => decreaseHeight()} style={addCSS()} className={styles.event}>
       <div className={styles.overlay}></div>
-      <Image src={activity.coverImage.large} width={250} height={250} className={styles.background} alt="" />
+      <Image src={activity.coverImage.large} width={250} height={250} className={styles.background} alt={activity.anime_title} />
       <span className={styles.anime}>
         {activity.anime_title} {activity.format === "MOVIE" && "(Movie)"}
         {activity.progress && `(EP ${activity.progress})`} {activity.status === "completed" && "(Completed)"}
@@ -52,4 +53,4 @@ const CalendarEvent: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   );
 };
 
-export default CalendarEvent;
+export default Event;

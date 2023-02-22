@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import { CalendarButtons, Calendar, Header, Footer, SettingModal } from "@/components";
 
 // Styles
-import styles from "@/styles/Home.module.scss";
+import styles from "@/styles/pages/Home.module.scss";
 
 export default function Home() {
   const { data: session } = useSession();

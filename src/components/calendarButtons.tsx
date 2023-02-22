@@ -12,8 +12,6 @@ import Sticky from "react-stickynode";
 // Icons
 import { CameraIcon, Cog8ToothIcon, ChevronLeftIcon, ChevronRightIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 
-import html2canvas from "html2canvas";
-
 const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, month, setYear, setMonth, setVisible }) => {
   const handler = () => setVisible(true);
 
@@ -200,7 +198,7 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
           </Tooltip> */}
         </div>
       </div>
-      <div className={styles.legends}>
+      {/* <div className={styles.legends}>
         <div className={styles.legend}>
           <svg viewBox="0 0 100 100" fill="orange" width={20} xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="50" />
@@ -213,7 +211,7 @@ const CalendarButtons: React.FC<ICalendarButtonsProps> = ({ refElement, year, mo
           </svg>
           <span className={styles.desc}>First episode</span>
         </div>
-      </div>
+      </div> */}
     </Sticky>
   );
 };
