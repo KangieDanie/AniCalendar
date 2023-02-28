@@ -1,15 +1,23 @@
 import * as React from "react";
 
 // Styles
-import styles from "@/styles/components/calendarButton.module.scss";
+import styles from "@/styles/components/calendar/group.module.scss";
 
 // Modules
 import { Modal, Switch } from "@nextui-org/react";
 
 // Icons
-import { CameraIcon, Cog8ToothIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import {
+  CameraIcon,
+  Cog8ToothIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/solid";
 
-const SettingModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => {
+const SettingModal: React.FC<ISettingModalProps> = ({
+  visible,
+  setVisible,
+}) => {
   const closeHandler = () => {
     setVisible(false);
     console.log("closed");
@@ -28,7 +36,8 @@ const SettingModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => 
           color: "#c7d7e9",
           fontSize: "$sm",
           backgroundColor: "#151f2e",
-        }}>
+        }}
+      >
         <Modal.Header
           justify="flex-start"
           css={{
@@ -37,7 +46,8 @@ const SettingModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => 
             backgroundColor: "#151f2e",
             flexDirection: "column",
             alignItems: "flex-start",
-          }}>
+          }}
+        >
           <h2>Calendar Settings</h2>
           <strong>Modify the calendar to your liking.</strong>
           <hr className={styles.line} />
@@ -47,7 +57,8 @@ const SettingModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => 
             color: "#c7d7e9",
             fontSize: "$sm",
             backgroundColor: "#151f2e",
-          }}>
+          }}
+        >
           <div className={styles.switch_container}>
             <div>
               <h4 className={styles.setting}>Show completed anime.</h4>
@@ -58,7 +69,9 @@ const SettingModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => 
           <hr className={styles.line} />
           <div className={styles.switch_container}>
             <div>
-              <h4 className={styles.setting}>Show upcoming schedule of anime &quot;In Progress&quot;.</h4>
+              <h4 className={styles.setting}>
+                Show upcoming schedule of anime &quot;In Progress&quot;.
+              </h4>
               <p>This is a description</p>
             </div>
             <Switch />
@@ -77,7 +90,8 @@ const SettingModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => 
             color: "#9fadbd",
             fontSize: "$sm",
             backgroundColor: "#151f2e",
-          }}>
+          }}
+        >
           <button className={styles.button}>Cancel</button>
           <button className={styles.button}>Save Changes</button>
         </Modal.Footer>

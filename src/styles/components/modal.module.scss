@@ -1,0 +1,99 @@
+@import "../mixins";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.line {
+  background: #68748670;
+  border-color: #68748670;
+  border-width: 0px;
+  border-style: none;
+  height: 1px;
+}
+
+.setting {
+  margin-bottom: 0;
+}
+
+.legend {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #9fadbd;
+  font-weight: 600;
+}
+
+.desc {
+  margin-left: 10px;
+}
+
+.legends {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.save {
+  background-color: var(--foreground-text-highlight);
+  padding: 15px;
+  width: 150px;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 1em;
+  text-align: center;
+  color: white;
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.6s ease;
+  }
+  @include responsive(smartphone-portrait) {
+    width: 120px;
+    padding: 10px;
+  }
+}
+
+.cancel {
+  background-color: transparent;
+  padding: 15px;
+  width: 150px;
+  border: 1px solid #be1f1f;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin: 0 1em;
+  text-align: center;
+  color: white;
+  &:hover {
+    background-color: #be1f1f;
+  }
+  @include responsive(smartphone-portrait) {
+    width: 120px;
+    padding: 10px;
+  }
+}
+
+.colorbtn {
+  width: 30px;
+  height: 30px;
+  border: 3px solid;
+  border-radius: 50%;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.colorctn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

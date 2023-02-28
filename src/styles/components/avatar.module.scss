@@ -1,0 +1,17 @@
+@import "../mixins";
+
+.circle {
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  cursor: pointer;
+  margin: 0 0.5em;
+
+  & img {
+    height: 90%;
+    width: 90%;
+  }
+}

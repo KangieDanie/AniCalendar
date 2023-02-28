@@ -6,7 +6,15 @@ import { useSession } from "next-auth/react";
 
 // Modules
 import dayjs from "dayjs";
-import { CalendarButtons, Calendar, Header, Footer, SettingModal } from "@/components";
+import {
+  Group,
+  Calendar,
+  Header,
+  Footer,
+  SettingModal,
+  LegendModal,
+} from "@/components";
+import useLocalStorageState from "use-local-storage-state";
 
 // Styles
 import styles from "@/styles/pages/Home.module.scss";
@@ -17,7 +25,15 @@ export default function Home() {
   const [year, setYear] = React.useState<string>(dayjs().format("YYYY"));
   const [month, setMonth] = React.useState<string>(dayjs().format("M"));
   const [visible, setVisible] = React.useState<boolean>(false);
-
+  const [settings, setSettings] = useLocalStorageState("settings", {
+    defaultValue: {
+      colors: {
+        completed: "#ffa500",
+        first_episode: "#800080",
+        upcoming_episode: "#6495ed",
+      },
+    },
+  });
   return (
     <>
       <Head>
@@ -37,8 +53,16 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            <SettingModal setVisible={setVisible} visible={visible} />
-            <CalendarButtons refElement={refEl} year={year} month={month} setMonth={setMonth} setYear={setYear} setVisible={setVisible} />
+            <LegendModal setVisible={setVisible} visible={visible} />
+            <Group
+              refElement={refEl}
+              year={year}
+              month={month}
+              setMonth={setMonth}
+              setYear={setYear}
+              setVisible={setVisible}
+            />
+
             <Calendar refElement={refEl} year={year} month={month} />
           </>
         )}

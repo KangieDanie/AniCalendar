@@ -4,11 +4,12 @@ import * as React from "react";
 import Image from "next/image";
 
 // Styles
-import styles from "@/styles/components/calendarEvent.module.scss";
+import styles from "@/styles/components/calendar/event.module.scss";
+import useLocalStorageState from "use-local-storage-state";
 
 const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   const [height, setHeight] = React.useState<string>("60px");
-
+  const [settings, setSettings]: any = useLocalStorageState("settings");
   const addCSS = (): React.CSSProperties => {
     return {
       height: getHeight(),
@@ -18,9 +19,13 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
 
   const checkSettings = (): string => {
     if (activity.progress) {
-      if (activity.progress.toString().startsWith("1 -") || activity.progress.toString() === "1") return "purple";
+      if (
+        activity.progress.toString().startsWith("1 -") ||
+        activity.progress.toString() === "1"
+      )
+        return settings.colors["first_episode"];
     } else if (activity.status) {
-      if (activity.status === "completed") return "orange";
+      if (activity.status === "completed") return settings.colors["completed"];
     }
     return "";
   };
@@ -42,12 +47,27 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   };
 
   return (
-    <a href={activity.url} target="_blank" rel="noopener noreferrer" onMouseEnter={() => increaseHeight()} onMouseLeave={() => decreaseHeight()} style={addCSS()} className={styles.event}>
+    <a
+      href={activity.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => increaseHeight()}
+      onMouseLeave={() => decreaseHeight()}
+      style={addCSS()}
+      className={styles.event}
+    >
       <div className={styles.overlay}></div>
-      <Image src={activity.coverImage.large} width={250} height={250} className={styles.background} alt={activity.anime_title} />
+      <Image
+        src={activity.coverImage.large}
+        width={250}
+        height={250}
+        className={styles.background}
+        alt={activity.anime_title}
+      />
       <span className={styles.anime}>
         {activity.anime_title} {activity.format === "MOVIE" && "(Movie)"}
-        {activity.progress && `(EP ${activity.progress})`} {activity.status === "completed" && "(Completed)"}
+        {activity.progress && `(EP ${activity.progress})`}{" "}
+        {activity.status === "completed" && "(Completed)"}
       </span>
     </a>
   );

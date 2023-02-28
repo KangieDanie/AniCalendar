@@ -1,9 +1,10 @@
 import Calendar from "./calendar";
 import Event from "./calendar/event";
 
-import CalendarButtons from "./calendarButtons";
+import Group from "./calendar/group";
 import Header from "./header";
 import Footer from "./footer";
 import SettingModal from "./modals/settingModal";
+import LegendModal from "./modals/legendModal";
 
-export { Calendar, CalendarButtons, Header, Footer, SettingModal, Event };
+export { Calendar, Group, Header, Footer, SettingModal, Event, LegendModal };

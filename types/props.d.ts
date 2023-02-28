@@ -22,3 +22,19 @@ interface ISettingModalProps {
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+interface IAvatarProps {
+  image: string;
+}
+
+interface IColorSelectorProps {
+  color: string;
+  setColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface ICalendarButtonProps {
+  visible: boolean;
+  content: string;
+  icon: any;
+  method: any;
+}

@@ -11,14 +11,16 @@ import { client } from "@/apolloClient";
 import styles from "@/styles/components/header.module.scss";
 
 // Modules
-import { Avatar, Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 
 // Icons
 import {
   ArrowLeftOnRectangleIcon,
   ExclamationCircleIcon,
   LinkIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
+import Avatar from "./avatar";
 
 const Header: React.FC = () => {
   const { data: session } = useSession();
@@ -27,8 +29,8 @@ const Header: React.FC = () => {
     <header className={styles.nav}>
       <div className={styles.container}>
         <Image
-          width={100}
-          height={100}
+          width={60}
+          height={60}
           className={styles.logo}
           src="/AniCalendarLogo.png"
           alt="AniCalendar Logo"
@@ -48,27 +50,23 @@ const Header: React.FC = () => {
       {session?.user && (
         <>
           <div className={styles.container}>
-            <span>
-              <small>Welcome!</small>
-              <br />
-              <strong>{session.user.name}</strong>
-            </span>
             {session.user.image && (
               <>
                 <Tooltip
                   placement="bottom"
+                  style={{ alignItems: "center", cursor: "pointer" }}
                   css={{
                     color: "#9fadbd",
                     fontSize: "$sm",
                     padding: "5px 10px",
                     width: "150px",
-                    borderRadius: "0",
+                    borderRadius: "5px",
                     backgroundColor: "#0b1622",
                     zIndex: "300",
                     display: "flex",
                     justifyContent: "center",
                   }}
-                  offset={8}
+                  offset={2}
                   content={
                     <div className={styles.menu}>
                       <a
@@ -106,17 +104,14 @@ const Header: React.FC = () => {
                       </a>
                     </div>
                   }
+                  hideArrow
+                  shadow={false}
                 >
-                  <Avatar
-                    css={{
-                      margin: "0 1em",
-                    }}
-                    size="lg"
-                    src={session.user.image.medium}
-                    alt="User Profile Picture"
-                    color="gradient"
-                    bordered
-                  />
+                  <Avatar image={session.user.image.large} />
+                  <span className={styles.name}>
+                    <strong>{session.user.name}</strong>
+                  </span>
+                  <ChevronDownIcon width={16} className={styles.arrow} />
                 </Tooltip>
               </>
             )}
