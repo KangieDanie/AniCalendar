@@ -1,4 +1,4 @@
-@import "../mixins";
+@import "../../mixins";
 
 .calendar_month {
   position: relative;
@@ -15,9 +15,9 @@
     display: none;
   }
 
-  @include responsive(laptop) {
-    display: none;
-  }
+  // @include responsive(laptop) {
+  //   display: none;
+  // }
 }
 
 .calendar-month-header {
@@ -238,7 +238,7 @@
   @include responsive(tablet) {
     display: block;
   }
-  @include responsive(laptop) {
-    display: block;
-  }
+  // @include responsive(laptop) {
+  //   display: block;
+  // }
 }

@@ -1,20 +1,9 @@
 @import "../mixins";
 
-.avatar {
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: 0 1em;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.411);
-  padding: 5px;
-}
-
 .nav {
   background-color: var(--header-background-color);
   color: var(--foreground-text-color);
-  height: 150px;
+  height: 80px;
   width: 100%;
   position: relative;
   display: flex;
@@ -23,12 +12,12 @@
   align-items: center;
 
   @include responsive(smartphone-portrait) {
-    height: 100px;
+    height: 70px;
     padding: 1em 1em;
   }
 
   @include responsive(laptop) {
-    height: 150px;
+    height: 80px;
   }
 }
 
@@ -36,7 +25,7 @@
   color: var(--foreground-text-color);
   font-weight: bold;
   text-align: left;
-  font-size: 2.5em;
+  font-size: 1.5em;
   margin-bottom: 0;
   @include responsive(smartphone-portrait) {
     display: none;
@@ -47,6 +36,8 @@
   color: var(--foreground-text-color);
   font-weight: 600;
   text-align: left;
+  font-size: 0.8em;
+  display: none;
   @include responsive(smartphone-portrait) {
     display: none;
   }
@@ -71,18 +62,17 @@
   margin: 0 1em;
   text-align: center;
 
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.6s ease;
+    -webkit-box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
+    -moz-box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
+    box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
+  }
   @include responsive(smartphone-portrait) {
     width: 120px;
     padding: 10px;
   }
-}
-
-.button:hover {
-  transform: scale(1.1);
-  transition: all 0.6s ease;
-  -webkit-box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
-  -moz-box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
-  box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
 }
 
 .blue {
@@ -117,7 +107,21 @@
 
 .logo {
   @include responsive(smartphone-portrait) {
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 80%;
   }
+}
+
+.arrow {
+  color: #9fadbd;
+  font-weight: 500;
+  margin: 0 0.5em;
+  @include responsive(smartphone-portrait) {
+    display: none;
+  }
+}
+
+.name {
+  color: #9fadbd;
+  font-weight: 500;
 }

@@ -10,7 +10,9 @@ interface ICalendarButtonsProps {
   month: string;
   setYear: React.Dispatch<React.SetStateAction<string>>;
   setMonth: React.Dispatch<React.SetStateAction<string>>;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setLegendVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setSettingVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoadingVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface ICalendarEventProps {
@@ -21,4 +23,20 @@ interface ICalendarEventProps {
 interface ISettingModalProps {
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface IAvatarProps {
+  image: string;
+}
+
+interface IColorSelectorProps {
+  color: string;
+  setColor: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface ICalendarButtonProps {
+  visible: boolean;
+  content: string;
+  icon: any;
+  method: any;
 }

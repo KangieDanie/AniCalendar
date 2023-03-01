@@ -1,14 +1,28 @@
 import dayjs from "dayjs";
 
 const parseActivities = (activities: any): Activity[] => {
+  const stringSetting = window.localStorage.getItem("settings");
+  if (!stringSetting) return [];
+  const settings: any | null = JSON.parse(stringSetting);
+
   const watchedActivities = activities.Page.activities.filter(
     (ac: { status: string }): any =>
-      ac.status === "watched episode" || ac.status === "completed"
+      ac.status === "watched episode" ||
+      (settings.filters["show_completed"] && ac.status === "completed") ||
+      ac.status === "read chapter"
+  );
+
+  const filterFormatActivities = watchedActivities.filter(
+    (ac: { media: any }): any =>
+      ac.media.format === "TV" ||
+      ac.media.format === "MOVIE" ||
+      ac.media.format === "ONA" ||
+      ac.media.format === "MANGA"
   );
 
   let activityList: Activity[] = [];
 
-  watchedActivities.forEach((ac: any) => {
+  filterFormatActivities.forEach((ac: any) => {
     activityList.push({
       date: dayjs.unix(ac.createdAt).format("YYYY-MM-DD"),
       anime_id: ac.media.id,
@@ -22,8 +36,6 @@ const parseActivities = (activities: any): Activity[] => {
       format: ac.media.format,
     });
   });
-
-  console.log(activityList);
 
   return activityList;
 };

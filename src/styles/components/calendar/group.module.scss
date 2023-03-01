@@ -1,11 +1,13 @@
-@import "../mixins";
+@import "../../mixins";
 
 .date {
   color: white;
   font-weight: 700;
   margin-bottom: 0;
+  margin: 0 1em;
   @include responsive(smartphone-portrait) {
-    font-size: 1.3em;
+    font-size: 1.1em;
+    margin: 0 0.2em;
   }
 }
 
@@ -20,6 +22,7 @@
 .sub {
   display: flex;
   margin: 0 0.5em;
+  align-items: center;
 }
 
 .camera {
@@ -29,8 +32,8 @@
 }
 
 .cog {
-  margin-left: 10px;
   color: #9fadbd;
+  margin: 0 0.3em;
 }
 
 .icon_button {
@@ -76,7 +79,7 @@
   padding: 1em 2.5em;
 
   @include responsive(smartphone-portrait) {
-    padding: 1em 1em;
+    padding: 0.2em;
   }
 }
 
