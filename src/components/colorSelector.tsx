@@ -10,8 +10,6 @@ const ColorSelector: React.FC<IColorSelectorProps> = ({ color, setColor }) => {
     React.useState<boolean>(false);
 
   const handleChange = (color: any) => {
-    console.log(color);
-
     setColor(color.hex);
   };
 

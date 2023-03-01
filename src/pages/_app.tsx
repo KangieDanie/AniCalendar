@@ -16,6 +16,7 @@ import "@/styles/globals.scss";
 
 // Modules
 import { NextUIProvider } from "@nextui-org/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 const overpass = Overpass({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -30,10 +31,12 @@ export default function App({
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
-        <NextUIProvider>
-          <Component {...pageProps} className={overpass.className} />
-          <Analytics />
-        </NextUIProvider>
+        <NextThemesProvider defaultTheme="dark" attribute="class">
+          <NextUIProvider>
+            <Component {...pageProps} className={overpass.className} />
+            <Analytics />
+          </NextUIProvider>
+        </NextThemesProvider>
       </SessionProvider>
     </ApolloProvider>
   );

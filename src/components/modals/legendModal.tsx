@@ -4,16 +4,8 @@ import * as React from "react";
 import styles from "@/styles/components/modal.module.scss";
 
 // Modules
-import { Modal, Switch } from "@nextui-org/react";
+import { Modal } from "@nextui-org/react";
 
-// Icons
-import {
-  CameraIcon,
-  Cog8ToothIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@heroicons/react/24/solid";
-import { BlockPicker, TwitterPicker } from "@hello-pangea/color-picker";
 import useLocalStorageState from "use-local-storage-state";
 import ColorSelector from "../colorSelector";
 
@@ -28,25 +20,19 @@ const LegendModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => {
   const [upcomingEpisodeColor, setUpcomingEpisodeColor] =
     React.useState<string>(settings.colors["upcoming_episode"]);
 
-  React.useEffect(() => {
-    console.log(settings);
-  }, []);
-
   const closeHandler = () => {
     setVisible(false);
-    console.log("closed");
+    setCompletedColor(settings.colors["completed"]);
+    setFirstEpisodeColor(settings.colors["first_episode"]);
+    setUpcomingEpisodeColor(settings.colors["upcoming_episode"]);
   };
 
   const saveChanges = () => {
-    setSettings({
-      colors: {
-        completed: completedColor,
-        first_episode: firstEpisodeColor,
-        upcoming_episode: upcomingEpisodeColor,
-      },
-    });
+    settings.colors["completed"] = completedColor;
+    settings.colors["first_episode"] = firstEpisodeColor;
+    settings.colors["upcoming_episode"] = upcomingEpisodeColor;
+    setSettings(settings);
     setVisible(false);
-    console.log("closed");
   };
 
   return (
@@ -94,8 +80,13 @@ const LegendModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => {
                 border: "3px solid " + completedColor,
                 borderRadius: "5px",
                 marginTop: "15px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-            ></div>
+            >
+              Example
+            </div>
           </div>
           <ColorSelector color={completedColor} setColor={setCompletedColor} />
         </div>
@@ -110,8 +101,13 @@ const LegendModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => {
                 border: "3px solid " + firstEpisodeColor,
                 borderRadius: "5px",
                 marginTop: "15px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-            ></div>
+            >
+              Example
+            </div>
           </div>
           <ColorSelector
             color={firstEpisodeColor}
@@ -129,8 +125,13 @@ const LegendModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => {
                 border: "3px solid " + upcomingEpisodeColor,
                 borderRadius: "5px",
                 marginTop: "15px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-            ></div>
+            >
+              Example
+            </div>
           </div>
           <ColorSelector
             color={upcomingEpisodeColor}
@@ -145,7 +146,9 @@ const LegendModal: React.FC<ISettingModalProps> = ({ visible, setVisible }) => {
           backgroundColor: "#151f2e",
         }}
       >
-        <button className={styles.cancel}>Cancel</button>
+        <button className={styles.cancel} onClick={() => closeHandler()}>
+          Cancel
+        </button>
         <button className={styles.save} onClick={() => saveChanges()}>
           Save Changes
         </button>

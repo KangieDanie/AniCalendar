@@ -18,19 +18,28 @@ import useLocalStorageState from "use-local-storage-state";
 
 // Styles
 import styles from "@/styles/pages/Home.module.scss";
+import LoaderModal from "@/components/modals/loaderModal";
 
 export default function Home() {
   const { data: session } = useSession();
   const refEl: any = React.useRef<HTMLInputElement>();
   const [year, setYear] = React.useState<string>(dayjs().format("YYYY"));
   const [month, setMonth] = React.useState<string>(dayjs().format("M"));
-  const [visible, setVisible] = React.useState<boolean>(false);
+  const [legendVisible, setLegendVisible] = React.useState<boolean>(false);
+  const [settingVisible, setSettingVisible] = React.useState<boolean>(false);
+  const [loadingVisible, setLoadingVisible] = React.useState<boolean>(false);
   const [settings, setSettings] = useLocalStorageState("settings", {
     defaultValue: {
       colors: {
         completed: "#ffa500",
         first_episode: "#800080",
         upcoming_episode: "#6495ed",
+      },
+      filters: {
+        type: "anime",
+        show_upcoming_ep: false,
+        show_only_first: false,
+        show_completed: true,
       },
     },
   });
@@ -53,14 +62,27 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            <LegendModal setVisible={setVisible} visible={visible} />
+            <LegendModal
+              setVisible={setLegendVisible}
+              visible={legendVisible}
+            />
+            <SettingModal
+              setVisible={setSettingVisible}
+              visible={settingVisible}
+            />
+            <LoaderModal
+              setVisible={setLoadingVisible}
+              visible={loadingVisible}
+            />
             <Group
               refElement={refEl}
               year={year}
               month={month}
               setMonth={setMonth}
               setYear={setYear}
-              setVisible={setVisible}
+              setLegendVisible={setLegendVisible}
+              setSettingVisible={setSettingVisible}
+              setLoadingVisible={setLoadingVisible}
             />
 
             <Calendar refElement={refEl} year={year} month={month} />

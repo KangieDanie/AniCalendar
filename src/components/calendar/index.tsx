@@ -22,6 +22,7 @@ import {
 } from "@/helpers/element";
 import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
 import useCheckTabletScreen from "@/hooks/useCheckTabletScreen";
+import useLocalStorageState from "use-local-storage-state";
 
 const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   const { data: session } = useSession();
@@ -31,9 +32,11 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   const [loading, setLoading] = React.useState(true);
   const isMobile = useCheckMobileScreen();
   const isTablet = useCheckTabletScreen();
+  const [settings, setSettings]: any = useLocalStorageState("settings");
 
   // TODO: change to hook
   const fetchAll = async () => {
+    setData([]);
     let hasNextPage = true;
     let allResults: any;
     let page = 1;
@@ -49,7 +52,7 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
     }
     while (hasNextPage) {
       const { data } = await client.query<any>({
-        query: GET_ACTIVITIES,
+        query: GET_ACTIVITIES(settings.filters["type"]),
         variables: { page, dateLess, dateGreater, userId },
       });
 
@@ -62,7 +65,6 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
     setLoading(false);
     allResults = groupActivitiesByDate(array);
     setData(allResults);
-    //console.log(allResults);
 
     if (isMobile || isTablet) {
       let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(
@@ -93,7 +95,7 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
 
   React.useEffect(() => {
     fetchAll();
-  }, [year, month]);
+  }, [year, month, settings]);
 
   return (
     <>

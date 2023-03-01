@@ -42,6 +42,21 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
     if (total >= 3) setHeight("90px");
   };
 
+  const getFormat = (): string => {
+    switch (activity.format) {
+      case "MOVIE":
+        return "(Movie)";
+      case "ONA":
+        return "(ONA)";
+      case "MANGA":
+        return "(MANGA)";
+      case "TV":
+        return "(ANIME)";
+      default:
+        return "UNKNOWN";
+    }
+  };
+
   const decreaseHeight = (): void => {
     if (total >= 3) setHeight("60px");
   };
@@ -65,8 +80,11 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
         alt={activity.anime_title}
       />
       <span className={styles.anime}>
-        {activity.anime_title} {activity.format === "MOVIE" && "(Movie)"}
-        {activity.progress && `(EP ${activity.progress})`}{" "}
+        {activity.anime_title} {getFormat()}{" "}
+        {activity.progress &&
+          `(${activity.format === "TV" ? "EP. " : "Ch. "} ${
+            activity.progress
+          })`}{" "}
         {activity.status === "completed" && "(Completed)"}
       </span>
     </a>

@@ -20,17 +20,25 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
+import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
+import useCheckTabletScreen from "@/hooks/useCheckTabletScreen";
+
 const Group: React.FC<ICalendarButtonsProps> = ({
   refElement,
   year,
   month,
   setYear,
   setMonth,
-  setVisible,
+  setLegendVisible,
+  setSettingVisible,
+  setLoadingVisible,
 }) => {
-  const handler = () => setVisible(true);
-
+  const handlerLegend = () => setLegendVisible(true);
+  const handlerSetting = () => setSettingVisible(true);
+  const isMobile = useCheckMobileScreen();
+  const isTablet = useCheckTabletScreen();
   const downloadImage = async (): Promise<void> => {
+    setLoadingVisible(true);
     if (refElement) {
       const dataUrl = await htmlToImage.toPng(refElement.current, {
         fetchRequestInit: {
@@ -42,6 +50,7 @@ const Group: React.FC<ICalendarButtonsProps> = ({
       link.download = `calendar-${year}-${month}.png`;
       link.href = dataUrl;
       link.click();
+      setLoadingVisible(false);
     }
   };
 
@@ -93,15 +102,18 @@ const Group: React.FC<ICalendarButtonsProps> = ({
           <Button
             content={"Legend"}
             icon={<InformationCircleIcon width={25} />}
-            method={() => nextMonth()}
+            method={() => handlerLegend()}
             visible
           />
-          <Button
-            content={"Next Month"}
-            icon={<ChevronRightIcon width={25} />}
-            method={() => nextMonth()}
-            visible={false}
-          />
+
+          {(!isMobile || !isTablet) && (
+            <Button
+              content={"Next Month"}
+              icon={<ChevronRightIcon width={25} />}
+              method={() => nextMonth()}
+              visible={false}
+            />
+          )}
         </div>
 
         <div className={styles.sub}>
@@ -138,17 +150,19 @@ const Group: React.FC<ICalendarButtonsProps> = ({
         </div>
 
         <div className={styles.sub}>
-          <Button
-            content={"Generate image"}
-            icon={<CameraIcon width={25} />}
-            method={() => downloadImage()}
-            visible
-          />
+          {(!isMobile || !isTablet) && (
+            <Button
+              content={"Generate image"}
+              icon={<CameraIcon width={25} />}
+              method={() => downloadImage()}
+              visible
+            />
+          )}
 
           <Button
             content={"Calendar Settings"}
             icon={<Cog8ToothIcon width={25} />}
-            method={() => handler()}
+            method={() => handlerSetting()}
             visible
           />
         </div>
