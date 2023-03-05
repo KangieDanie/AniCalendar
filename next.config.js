@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ["s4.anilist.co"],
     formats: ["image/webp"],
+    unoptimized: true,
   },
 };
 
