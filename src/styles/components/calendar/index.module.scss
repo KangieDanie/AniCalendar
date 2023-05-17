@@ -46,7 +46,7 @@
 .day_of_week {
   color: #9fadbd;
   font-size: 18px;
-  background-color: rgb(21, 31, 46);
+  // background-color: rgb(21, 31, 46);
   padding-bottom: 25px;
   padding-top: 25px;
   font-weight: 500;
@@ -58,6 +58,7 @@
   grid-template-columns: repeat(7, 1fr);
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
+  justify-items: center;
 }
 
 .day_of_week > * {
@@ -67,8 +68,8 @@
 .days_grid {
   height: 100%;
   position: relative;
-  grid-column-gap: var(--grid-gap);
-  grid-row-gap: var(--grid-gap);
+  column-gap: 20px;
+  row-gap: 20px;
   border-top: solid 1px var(--grey-200);
 }
 
@@ -85,18 +86,24 @@
   border: 1px solid #0b1622;
   font-size: 0.8em;
   transition: all ease-in-out 0.2s;
+  width: 100%;
+
+  border-radius: 19px;
 }
-.calendar_day:hover {
-  background-color: rgb(61, 180, 242);
-  color: #fff;
-}
+// .calendar_day:hover {
+//   background-color: rgb(61, 180, 242);
+//   color: #fff;
+// }
 
 .calendar_day > span {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 20px;
+  left: 15px;
+  z-index: 155;
+  font-size: 16px;
+  color: aliceblue;
   top: 10px;
   width: 14px;
   height: 14px;
@@ -136,6 +143,8 @@
   border: 1px solid #0b1622;
   font-size: 0.8em;
   transition: all ease-in-out 0.2s;
+  width: 100%;
+  border-radius: 19px;
 }
 
 .calendar_day__not_current > span {
@@ -241,4 +250,28 @@
   // @include responsive(laptop) {
   //   display: block;
   // }
+}
+
+.test-day-top {
+  background: #151f2e;
+  border-radius: 19px;
+  padding: 10px;
+  width: 120px;
+}
+
+.svgCornerTL {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: #469beb;
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+  height: 5em;
+  border-bottom-left-radius: 16px;
+  z-index: 150;
+}
+
+.calendar_with_events {
+  border: #469beb 2px solid;
 }

@@ -17,7 +17,7 @@ import {
 import useLocalStorageState from "use-local-storage-state";
 
 // Styles
-import styles from "@/styles/pages/Home.module.scss";
+import styles from "@/styles/pages/Calendar.module.scss";
 import LoaderModal from "@/components/modals/loaderModal";
 
 export default function Home() {
@@ -52,44 +52,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={styles.main}>
-        {!session && (
-          <>
-            <div className={styles.container}>
-              <h2 className={styles.title}>Sign in to view your calendar.</h2>
-            </div>
-          </>
-        )}
-        {session?.user && (
-          <>
-            <LegendModal
-              setVisible={setLegendVisible}
-              visible={legendVisible}
-            />
-            <SettingModal
-              setVisible={setSettingVisible}
-              visible={settingVisible}
-            />
-            <LoaderModal
-              setVisible={setLoadingVisible}
-              visible={loadingVisible}
-            />
-            <Group
-              refElement={refEl}
-              year={year}
-              month={month}
-              setMonth={setMonth}
-              setYear={setYear}
-              setLegendVisible={setLegendVisible}
-              setSettingVisible={setSettingVisible}
-              setLoadingVisible={setLoadingVisible}
-            />
+      <div className={styles["calendar-header"]}></div>
+      <div className={styles.overlay}>
+        {/* <h1 className={styles.title}>September 2023</h1> */}
+      </div>
+      <main className={styles.testgr}>
+        <Group
+          refElement={refEl}
+          year={year}
+          month={month}
+          setMonth={setMonth}
+          setYear={setYear}
+          setLegendVisible={setLegendVisible}
+          setSettingVisible={setSettingVisible}
+          setLoadingVisible={setLoadingVisible}
+        />
 
-            <Calendar refElement={refEl} year={year} month={month} />
-          </>
-        )}
+        <Calendar refElement={refEl} year={year} month={month} />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

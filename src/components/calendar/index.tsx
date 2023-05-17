@@ -30,9 +30,23 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   const [days, setDays] = React.useState<CalendarDay[]>([]);
   const [data, setData] = React.useState<any>();
   const [loading, setLoading] = React.useState(true);
-  const isMobile = useCheckMobileScreen();
-  const isTablet = useCheckTabletScreen();
-  const [settings, setSettings]: any = useLocalStorageState("settings");
+  // const isMobile = useCheckMobileScreen();
+  // const isTablet = useCheckTabletScreen();
+  const [settings, setSettings] = useLocalStorageState("settings", {
+    defaultValue: {
+      colors: {
+        completed: "#ffa500",
+        first_episode: "#800080",
+        upcoming_episode: "#6495ed",
+      },
+      filters: {
+        type: "anime",
+        show_upcoming_ep: false,
+        show_only_first: false,
+        show_completed: true,
+      },
+    },
+  });
 
   // TODO: change to hook
   const fetchAll = async () => {
@@ -66,7 +80,7 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
     allResults = groupActivitiesByDate(array);
     setData(allResults);
 
-    if (isMobile || isTablet) {
+    if (false) {
       let currentMonthDays: CalendarDay[] = createDaysForCurrentMonth(
         year,
         month
@@ -108,7 +122,7 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
 
         {!loading && (
           <ol id="calendar-days" className={styles.days_grid}>
-            {days.length > 0 && createDaysCells(data, days)}
+            <div></div> {days.length > 0 && createDaysCells(data, days)}
           </ol>
         )}
       </div>

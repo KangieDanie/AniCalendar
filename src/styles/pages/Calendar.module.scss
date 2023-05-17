@@ -1,0 +1,52 @@
+@import "../mixins";
+
+.main {
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/Anime_Background.png");
+  background-size: cover;
+  background-position: center;
+  padding: 2em 25em;
+
+  @include responsive(smartphone-portrait) {
+    padding: 10px;
+  }
+}
+
+.calendar-header {
+  background-image: url("/test_heading.jpg");
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  opacity: 30%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 300px;
+  left: 0;
+  background: linear-gradient(
+    0deg,
+    #0b1622 15.49%,
+    rgba(11, 22, 34, 0.14) 99.99%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.testgr {
+  background: #0b1622;
+  padding: 1em 5em;
+}

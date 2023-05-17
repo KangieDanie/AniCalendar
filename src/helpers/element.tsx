@@ -3,7 +3,11 @@ import styles from "@/styles/components/calendar/index.module.scss";
 import dayjs from "dayjs";
 
 const createWeekDaysList = (weekdays: string[]): JSX.Element[] => {
-  return weekdays.map((day) => <li key={day}>{day}</li>);
+  return weekdays.map((day) => (
+    <div className={styles["test-day-top"]} key={day}>
+      <li>{day}</li>
+    </div>
+  ));
 };
 
 const createEvents = (data: any[], date: any) => {
@@ -23,12 +27,19 @@ const createDaysCells = (data: any[], days: CalendarDay[]): JSX.Element[] => {
   return days.map((day) => (
     <li
       key={day.date + day.dayOfMonth}
-      className={
+      className={`${
         !day.isCurrentMonth
           ? styles.calendar_day__not_current
           : styles.calendar_day
-      }
+      } ${
+        data[day.date as unknown as number] > 0
+          ? styles.calendar_with_events
+          : ""
+      }`}
     >
+      <svg className={styles.svgCornerTL} id="svg4" viewBox="0 0 50 50">
+        <path id="path1" d="M0 50L50 50L0 0" />
+      </svg>
       <span>{day.dayOfMonth}</span>
       {createEvents(data, day.date)}
     </li>

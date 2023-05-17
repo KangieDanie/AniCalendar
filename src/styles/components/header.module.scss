@@ -9,6 +9,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 2em 5em;
+  z-index: 15;
+  @include responsive(smartphone-portrait) {
+    padding: 1em;
+  }
 }
 
 .title {
@@ -19,9 +23,8 @@
   margin-bottom: 0;
   position: relative;
   @include responsive(smartphone-portrait) {
-    display: none;
+    font-size: 1.5em;
   }
-
   .badge {
     background: #fefefe;
     border-radius: 19px;
@@ -34,6 +37,11 @@
     top: -5px;
     font-size: 11px;
     padding: 3px;
+
+    @include responsive(smartphone-portrait) {
+      width: 30px;
+      font-size: 10px;
+    }
   }
 }
 
@@ -43,16 +51,10 @@
   text-align: left;
   font-size: 0.8em;
   display: none;
-  @include responsive(smartphone-portrait) {
-    display: none;
-  }
 }
 
 .text {
   margin-left: 10px;
-  @include responsive(smartphone-portrait) {
-    display: none;
-  }
 }
 
 .button {
@@ -75,7 +77,7 @@
     box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
   }
   @include responsive(smartphone-portrait) {
-    width: 120px;
+    width: 85px;
     padding: 10px;
   }
 }

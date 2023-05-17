@@ -35,8 +35,8 @@ const Group: React.FC<ICalendarButtonsProps> = ({
 }) => {
   const handlerLegend = () => setLegendVisible(true);
   const handlerSetting = () => setSettingVisible(true);
-  const isMobile = useCheckMobileScreen();
-  const isTablet = useCheckTabletScreen();
+  // const isMobile = useCheckMobileScreen();
+  // const isTablet = useCheckTabletScreen();
   const downloadImage = async (): Promise<void> => {
     setLoadingVisible(true);
     if (refElement) {
@@ -98,14 +98,7 @@ const Group: React.FC<ICalendarButtonsProps> = ({
       innerActiveClass={styles.sticky}
     >
       <div className={styles.container}>
-        <div className={styles.sub}>
-          <Button
-            content={"Legend"}
-            icon={<InformationCircleIcon width={25} />}
-            method={() => handlerLegend()}
-            visible
-          />
-
+        {/* <div className={styles.sub}>
           {(!isMobile || !isTablet) && (
             <Button
               content={"Next Month"}
@@ -114,7 +107,7 @@ const Group: React.FC<ICalendarButtonsProps> = ({
               visible={false}
             />
           )}
-        </div>
+        </div> */}
 
         <div className={styles.sub}>
           <Button
@@ -148,39 +141,7 @@ const Group: React.FC<ICalendarButtonsProps> = ({
             visible
           />
         </div>
-
-        <div className={styles.sub}>
-          {(!isMobile || !isTablet) && (
-            <Button
-              content={"Generate image"}
-              icon={<CameraIcon width={25} />}
-              method={() => downloadImage()}
-              visible
-            />
-          )}
-
-          <Button
-            content={"Calendar Settings"}
-            icon={<Cog8ToothIcon width={25} />}
-            method={() => handlerSetting()}
-            visible
-          />
-        </div>
       </div>
-      {/* <div className={styles.legends}>
-        <div className={styles.legend}>
-          <svg viewBox="0 0 100 100" fill="orange" width={20} xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="50" />
-          </svg>
-          <span className={styles.desc}>Completed</span>
-        </div>
-        <div className={styles.legend}>
-          <svg viewBox="0 0 100 100" fill="purple" width={20} xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="50" />
-          </svg>
-          <span className={styles.desc}>First episode</span>
-        </div>
-      </div> */}
     </Sticky>
   );
 };
