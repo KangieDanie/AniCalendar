@@ -26,6 +26,11 @@ html {
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: #0d0d0d;
+  height: 100vh;
+  background-image: url("/Anime_Background.png");
+  background-size: cover;
+  background-position: center;
 }
 
 a {
@@ -59,4 +64,8 @@ li {
 }
 .nextui-checkbox-mask {
   color: white !important;
+}
+
+#__next {
+  height: 100vh;
 }

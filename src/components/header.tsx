@@ -28,17 +28,18 @@ const Header: React.FC = () => {
   return (
     <header className={styles.nav}>
       <div className={styles.container}>
-        <Image
+        {/* <Image
           width={60}
           height={60}
           className={styles.logo}
           src="/AniCalendarLogo.png"
           alt="AniCalendar Logo"
-        />
+        /> */}
 
         <div className={styles.text}>
           <h1 className={styles.title}>
             Ani<span className={styles.blue}>Calendar</span>
+            <span className={styles.badge}>V2</span>
           </h1>
           <span className={styles.sub}>
             View your personal <span className={styles.blue}>AniList</span>{" "}
@@ -120,13 +121,11 @@ const Header: React.FC = () => {
       )}
       {!session && (
         <>
-          <button onClick={() => signIn()} className={styles.button}>
-            Sign In
-          </button>
+          <button className={styles.button}>Sign In</button>
         </>
       )}
     </header>
   );
 };
-
+// onClick={() => signIn()}
 export default Header;
