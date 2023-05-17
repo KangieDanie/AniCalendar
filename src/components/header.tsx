@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // Next.js
-import { signIn, signOut, useSession } from "next-auth/react";
+import { SignInOptions, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 // GraphQL Client
@@ -24,7 +24,9 @@ import Avatar from "./avatar";
 
 const Header: React.FC = () => {
   const { data: session } = useSession();
-
+  const options: SignInOptions = {
+    callbackUrl: "/calendar",
+  };
   return (
     <header className={styles.nav}>
       <div className={styles.container}>
@@ -121,11 +123,16 @@ const Header: React.FC = () => {
       )}
       {!session && (
         <>
-          <button className={styles.button}>Sign In</button>
+          <button
+            onClick={() => signIn("AniListProvider", options)}
+            className={styles.button}
+          >
+            Sign In
+          </button>
         </>
       )}
     </header>
   );
 };
-// onClick={() => signIn()}
+
 export default Header;
