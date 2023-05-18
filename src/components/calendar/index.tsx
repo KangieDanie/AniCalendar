@@ -13,7 +13,7 @@ import {
   WEEK_NAMES,
 } from "@/helpers";
 
-import { client } from "@/apolloClient";
+import { client } from "@/lib/apolloClient";
 import { useSession } from "next-auth/react";
 import {
   createDaysCells,

@@ -5,7 +5,7 @@ import { SignInOptions, signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 // GraphQL Client
-import { client } from "@/apolloClient";
+import { client } from "@/lib/apolloClient";
 
 // Styles
 import styles from "@/styles/components/header.module.scss";

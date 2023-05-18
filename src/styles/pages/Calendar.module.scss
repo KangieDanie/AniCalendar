@@ -19,12 +19,11 @@
 }
 
 .calendar-header {
-  background-image: url("/test_heading.jpg");
   height: 300px;
   background-size: cover;
   background-position: center;
   position: relative;
-  opacity: 30%;
+  opacity: 100%;
 }
 
 .overlay {
@@ -44,6 +43,19 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  z-index: 10;
+}
+
+.overlay-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 300px;
+  left: 0;
+  background-image: url("/test_heading.jpg");
+  bottom: 0;
+  background-position: center;
+  opacity: 30%;
 }
 
 .testgr {

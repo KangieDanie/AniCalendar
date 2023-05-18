@@ -1,17 +1,16 @@
 // Next.js
 import { Html, Head, Main, NextScript } from "next/document";
 
-// Modules
-import { CssBaseline } from "@nextui-org/react";
-
-export default function Document() {
+const Document = () => {
   return (
     <Html lang="en">
-      <Head>{CssBaseline.flush()}</Head>
+      <Head />
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
   );
-}
+};
+
+export default Document;

@@ -23,27 +23,36 @@ const createEvents = (data: any[], date: any) => {
   }
 };
 
+const checkIfDateHasEvents = (data: any[], date: any) => {
+  const results: any[] = data[date];
+  if (results) {
+    return results;
+  } else return undefined;
+};
+
 const createDaysCells = (data: any[], days: CalendarDay[]): JSX.Element[] => {
-  return days.map((day) => (
-    <li
-      key={day.date + day.dayOfMonth}
-      className={`${
-        !day.isCurrentMonth
-          ? styles.calendar_day__not_current
-          : styles.calendar_day
-      } ${
-        data[day.date as unknown as number] > 0
-          ? styles.calendar_with_events
-          : ""
-      }`}
-    >
-      <svg className={styles.svgCornerTL} id="svg4" viewBox="0 0 50 50">
-        <path id="path1" d="M0 50L50 50L0 0" />
-      </svg>
-      <span>{day.dayOfMonth}</span>
-      {createEvents(data, day.date)}
-    </li>
-  ));
+  return days.map((day) => {
+    const results = checkIfDateHasEvents(data, day.date);
+    return (
+      <li
+        key={day.date + day.dayOfMonth}
+        className={`${
+          !day.isCurrentMonth
+            ? styles.calendar_day__not_current
+            : styles.calendar_day
+        } ${results ? styles.calendar_with_events : ""}`}
+        style={{
+          backgroundImage: `url(https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx155907-gR7aRwVHwrjc.jpg)`,
+        }}
+      >
+        <svg className={styles.svgCornerTL} id="svg4" viewBox="0 0 50 50">
+          <path id="path1" d="M0 50L50 50L0 0" />
+        </svg>
+        <span>{day.dayOfMonth}</span>
+        {createEvents(data, day.date)}
+      </li>
+    );
+  });
 };
 
 const createDaysRow = (data: any[], days: CalendarDay[]): JSX.Element[] => {

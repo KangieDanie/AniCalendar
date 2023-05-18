@@ -9,7 +9,7 @@ import { Header, Footer } from "@/components";
 // Styles
 import styles from "@/styles/pages/Home.module.scss";
 
-export default function Landing() {
+const Landing = () => {
   return (
     <>
       <Head>
@@ -22,14 +22,17 @@ export default function Landing() {
       <Header />
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Unleash the <span className={styles.anilist}>Power of Nostalgia</span>
+          Unleash the <br />
+          <span className={styles.anilist}>Power of Nostalgia</span>
         </h1>
         <h2 className={styles["sub-title"]}>
           Dive into Your Anime and Manga Journey on a Dynamic Calendar!
         </h2>
-        <button className={styles.button}>Start exploring soon!</button>
+        <button className={styles.button}>Start exploring now</button>
       </main>
       <Footer />
     </>
   );
-}
+};
+
+export default Landing;

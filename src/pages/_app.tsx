@@ -6,7 +6,7 @@ import { Overpass } from "@next/font/google";
 
 // GraphQL
 import { ApolloProvider } from "@apollo/client";
-import { client } from "../apolloClient";
+import { client } from "../lib/apolloClient";
 
 // Vercel
 import { Analytics } from "@vercel/analytics/react";
@@ -14,18 +14,16 @@ import { Analytics } from "@vercel/analytics/react";
 // Styles
 import "@/styles/globals.scss";
 
-// Modules
-
 const overpass = Overpass({
   weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal"],
   subsets: ["latin"],
 });
 
-export default function App({
+const App = ({
   Component,
   pageProps: { session, ...pageProps },
-}: AppProps<{ session: Session }>) {
+}: AppProps<{ session: Session }>) => {
   return (
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
@@ -34,4 +32,6 @@ export default function App({
       </SessionProvider>
     </ApolloProvider>
   );
-}
+};
+
+export default App;

@@ -4,7 +4,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import { NextAuthOptionsCallback } from "types/next-auth";
 
 // GraphQL
-import { client } from "@/apolloClient";
+import { client } from "@/lib/apolloClient";
 import { GET_CURRENT_USER } from "@/queries";
 
 export const authOptions: NextAuthOptionsCallback = (req, res) => {
