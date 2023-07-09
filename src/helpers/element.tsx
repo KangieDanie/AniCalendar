@@ -39,10 +39,17 @@ const createDaysCells = (data: any[], days: CalendarDay[]): JSX.Element[] => {
         className={`${
           !day.isCurrentMonth
             ? styles.calendar_day__not_current
+            : data[day.date as any] && data[day.date as any].length === 1
+            ? styles["calendar-day-single-event"]
             : styles.calendar_day
-        } ${results ? styles.calendar_with_events : ""}`}
+        } ${results ? styles.calendar_with_events : ""} ${
+          results ? styles.calendar_with_events : ""
+        }`}
         style={{
-          backgroundImage: `url(https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx155907-gR7aRwVHwrjc.jpg)`,
+          backgroundImage:
+            data[day.date as any] && data[day.date as any].length === 1
+              ? `url(${data[day.date as any][0].coverImage.large})`
+              : "",
         }}
       >
         <svg className={styles.svgCornerTL} id="svg4" viewBox="0 0 50 50">

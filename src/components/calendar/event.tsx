@@ -6,6 +6,7 @@ import Image from "next/image";
 // Styles
 import styles from "@/styles/components/calendar/event.module.scss";
 import useLocalStorageState from "use-local-storage-state";
+import Chip from "./chip";
 
 const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   const [height, setHeight] = React.useState<string>("60px");
@@ -13,7 +14,6 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
   const addCSS = (): React.CSSProperties => {
     return {
       height: getHeight(),
-      borderColor: checkSettings(),
     };
   };
 
@@ -32,7 +32,7 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
 
   const getHeight = (): string => {
     if (total == 1) {
-      return "90%";
+      return "100%";
     } else if (total == 2) {
       return "45%";
     } else return height;
@@ -69,16 +69,24 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
       onMouseEnter={() => increaseHeight()}
       onMouseLeave={() => decreaseHeight()}
       style={addCSS()}
-      className={styles.event}
+      className={total === 1 ? styles["single-event"] : styles.event}
     >
-      <div className={styles.overlay}></div>
-      <Image
-        src={activity.coverImage.large}
-        width={250}
-        height={250}
-        className={styles.background}
-        alt={activity.anime_title}
-      />
+      <div
+        className={
+          total === 1 ? styles["single-event-overlay"] : styles.overlay
+        }
+      ></div>
+
+      {total > 1 && (
+        <Image
+          src={activity.coverImage.large}
+          width={250}
+          height={250}
+          className={styles.background}
+          alt={activity.anime_title}
+        />
+      )}
+
       <span className={styles.anime}>
         {activity.anime_title} {getFormat()}{" "}
         {activity.progress &&
@@ -87,6 +95,8 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
           })`}{" "}
         {activity.status === "completed" && "(Completed)"}
       </span>
+      <Chip name="Anime" color="orange" />
+      <Chip name="Completed" color="green" />
     </a>
   );
 };

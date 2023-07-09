@@ -1,0 +1,14 @@
+@import "../mixins";
+
+.chip {
+  /* Center the content */
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  z-index: 20;
+  /* Rounded border */
+  border-radius: 9999px;
+  position: relative;
+  /* Spacing */
+  padding: 0.25rem 0.5rem;
+}

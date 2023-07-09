@@ -8,9 +8,6 @@ import { Overpass } from "@next/font/google";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../lib/apolloClient";
 
-// Vercel
-import { Analytics } from "@vercel/analytics/react";
-
 // Styles
 import "@/styles/globals.scss";
 
@@ -28,7 +25,6 @@ const App = ({
     <ApolloProvider client={client}>
       <SessionProvider session={session}>
         <Component {...pageProps} className={overpass.className} />
-        <Analytics />
       </SessionProvider>
     </ApolloProvider>
   );

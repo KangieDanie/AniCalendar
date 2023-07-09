@@ -29,16 +29,10 @@ const Group: React.FC<ICalendarButtonsProps> = ({
   month,
   setYear,
   setMonth,
-  setLegendVisible,
-  setSettingVisible,
-  setLoadingVisible,
 }) => {
-  const handlerLegend = () => setLegendVisible(true);
-  const handlerSetting = () => setSettingVisible(true);
   // const isMobile = useCheckMobileScreen();
   // const isTablet = useCheckTabletScreen();
   const downloadImage = async (): Promise<void> => {
-    setLoadingVisible(true);
     if (refElement) {
       const dataUrl = await htmlToImage.toPng(refElement.current, {
         fetchRequestInit: {
@@ -50,7 +44,6 @@ const Group: React.FC<ICalendarButtonsProps> = ({
       link.download = `calendar-${year}-${month}.png`;
       link.href = dataUrl;
       link.click();
-      setLoadingVisible(false);
     }
   };
 
