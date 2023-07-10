@@ -108,6 +108,33 @@
   border-radius: 19px;
 }
 
+.calendar-day-two-event {
+  position: relative;
+  min-height: 270px;
+  font-size: 16px;
+  background-color: #0b1622;
+  color: rgb(159, 173, 189);
+  padding-top: 0;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border: 1px solid #0b1622;
+  font-size: 0.8em;
+  transition: all ease-in-out 0.2s;
+  width: 100%;
+  border-radius: 19px;
+
+  a {
+    margin: 0;
+    border: none;
+    border-radius: 17px;
+
+    div:first-child {
+      background: linear-gradient(rgb(11 22 34 / 68%), rgb(11, 22, 34));
+    }
+  }
+}
+
 .calendar-day-single-event > span {
   display: flex;
   justify-content: center;
@@ -115,7 +142,22 @@
   position: absolute;
   left: 15px;
   z-index: 155;
-  font-size: 16px;
+  font-size: 12px;
+  color: aliceblue;
+  top: 10px;
+  width: 14px;
+  height: 14px;
+  font-weight: 500;
+}
+
+.calendar-day-two-event > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 15px;
+  z-index: 155;
+  font-size: 12px;
   color: aliceblue;
   top: 10px;
   width: 14px;
@@ -135,7 +177,7 @@
   position: absolute;
   left: 15px;
   z-index: 155;
-  font-size: 16px;
+  font-size: 12px;
   color: aliceblue;
   top: 10px;
   width: 14px;

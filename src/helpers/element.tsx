@@ -39,9 +39,7 @@ const createDaysCells = (data: any[], days: CalendarDay[]): JSX.Element[] => {
         className={`${
           !day.isCurrentMonth
             ? styles.calendar_day__not_current
-            : data[day.date as any] && data[day.date as any].length === 1
-            ? styles["calendar-day-single-event"]
-            : styles.calendar_day
+            : getClassByEventSize(data[day.date as any])
         } ${results ? styles.calendar_with_events : ""} ${
           results ? styles.calendar_with_events : ""
         }`}
@@ -73,6 +71,15 @@ const createDaysRow = (data: any[], days: CalendarDay[]): JSX.Element[] => {
       <div className={styles.events}>{createEvents(data, day.date)}</div>
     </div>
   ));
+};
+
+const getClassByEventSize = (events: any): string => {
+  if (events) {
+    if (events.length === 1) return styles["calendar-day-single-event"];
+    else if (events.length === 2) return styles["calendar-day-two-event"];
+  }
+
+  return styles["calendar_day"];
 };
 
 export { createWeekDaysList, createDaysCells, createDaysRow };
