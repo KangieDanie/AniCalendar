@@ -50,6 +50,8 @@ const createDaysCells = (data: any[], days: CalendarDay[]): JSX.Element[] => {
             data[day.date as any] && data[day.date as any].length === 1
               ? `url(${data[day.date as any][0].coverImage.large})`
               : "",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <svg className={styles.svgCornerTL} id="svg4" viewBox="0 0 50 50">

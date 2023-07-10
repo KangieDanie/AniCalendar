@@ -7,58 +7,52 @@ import Image from "next/image";
 import styles from "@/styles/components/calendar/event.module.scss";
 import useLocalStorageState from "use-local-storage-state";
 import Chip from "./chip";
+import { findEventType } from "@/helpers/utils";
+import { EVENT_TYPE_COLOR } from "@/helpers/constants";
 
 const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
-  const [height, setHeight] = React.useState<string>("60px");
-  const [settings, setSettings]: any = useLocalStorageState("settings");
+  const [height, setHeight] = React.useState<string>("130px");
   const addCSS = (): React.CSSProperties => {
     return {
       height: getHeight(),
     };
   };
 
-  const checkSettings = (): string => {
+  const checkEpisode = (): JSX.Element | null => {
     if (activity.progress) {
       if (
         activity.progress.toString().startsWith("1 -") ||
         activity.progress.toString() === "1"
       )
-        return settings.colors["first_episode"];
-    } else if (activity.status) {
-      if (activity.status === "completed") return settings.colors["completed"];
+        return (
+          <Chip name="First Episode" color={EVENT_TYPE_COLOR.FIRST_EPISODE} />
+        );
+      else
+        return (
+          <Chip name={"Ep. " + activity.progress} color={EVENT_TYPE_COLOR.TV} />
+        );
     }
-    return "";
+    return null;
   };
 
   const getHeight = (): string => {
     if (total == 1) {
       return "100%";
     } else if (total == 2) {
-      return "45%";
+      return "50%";
     } else return height;
   };
 
-  const increaseHeight = (): void => {
-    if (total >= 3) setHeight("90px");
-  };
+  const getFormat = (): JSX.Element => {
+    console.log(activity);
 
-  const getFormat = (): string => {
-    switch (activity.format) {
-      case "MOVIE":
-        return "(Movie)";
-      case "ONA":
-        return "(ONA)";
-      case "MANGA":
-        return "(MANGA)";
-      case "TV":
-        return "(ANIME)";
-      default:
-        return "UNKNOWN";
-    }
-  };
-
-  const decreaseHeight = (): void => {
-    if (total >= 3) setHeight("60px");
+    const type = findEventType(activity.format);
+    return (
+      <Chip
+        name={type.name === "TV" ? "Anime" : type.name}
+        color={type.name === "TV" ? EVENT_TYPE_COLOR.ANIME : type.color}
+      />
+    );
   };
 
   return (
@@ -66,8 +60,6 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
       href={activity.url}
       target="_blank"
       rel="noopener noreferrer"
-      onMouseEnter={() => increaseHeight()}
-      onMouseLeave={() => decreaseHeight()}
       style={addCSS()}
       className={total === 1 ? styles["single-event"] : styles.event}
     >
@@ -87,16 +79,14 @@ const Event: React.FC<ICalendarEventProps> = ({ activity, total }) => {
         />
       )}
 
-      <span className={styles.anime}>
-        {activity.anime_title} {getFormat()}{" "}
-        {activity.progress &&
-          `(${activity.format === "TV" ? "EP. " : "Ch. "} ${
-            activity.progress
-          })`}{" "}
-        {activity.status === "completed" && "(Completed)"}
-      </span>
-      <Chip name="Anime" color="orange" />
-      <Chip name="Completed" color="green" />
+      <span className={styles.anime}>{activity.anime_title}</span>
+      <div style={{ marginTop: "5px" }}>
+        {getFormat()}
+        {checkEpisode()}
+        {activity.status === "completed" && (
+          <Chip name="Completed" color={EVENT_TYPE_COLOR.ONA} />
+        )}
+      </div>
     </a>
   );
 };

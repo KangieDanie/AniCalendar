@@ -99,9 +99,9 @@ const Calendar: React.FC<ICalendarProps> = ({ refElement, year, month }) => {
   return (
     <>
       <div className={styles.calendar_month} ref={refElement}>
-        <ol id="days-of-week" className={styles.day_of_week}>
+        {/* <ol id="days-of-week" className={styles.day_of_week}>
           {createWeekDaysList(weekdays)}
-        </ol>
+        </ol> */}
 
         {loading && <span className={styles.live}></span>}
 

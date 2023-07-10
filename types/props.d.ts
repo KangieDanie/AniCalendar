@@ -47,3 +47,8 @@ interface ICalendarButtonProps {
   icon: any;
   method: any;
 }
+
+interface IEventType {
+  name: string;
+  color: EVENT_TYPE_COLOR;
+}

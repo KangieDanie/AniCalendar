@@ -6,7 +6,7 @@ import {
   getNumberOfDaysInMonth,
 } from "./calendar";
 
-const WEEK_NAMES = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+import { WEEK_NAMES } from "./constants";
 
 export {
   parseActivities,

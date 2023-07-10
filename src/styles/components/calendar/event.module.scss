@@ -13,7 +13,10 @@
   width: 100%;
   height: 60px;
   font-size: 1em;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 10px;
   transition: all ease-in-out 0.2s;
   background-position: center;
   background-size: cover;
@@ -52,8 +55,8 @@
 }
 
 .single-event {
-  background-image: linear-gradient(rgb(11 22 34), rgb(11 22 34 / 20%));
-  border-radius: 5px;
+  background-image: linear-gradient(#0b162233, #0b1622);
+  border-radius: 17px;
   padding: 5px 15px;
   color: #fff;
   font-weight: 500;
@@ -66,11 +69,15 @@
   width: 100%;
   height: 60px;
   font-size: 1em;
-  display: block;
+
   transition: all ease-in-out 0.2s;
   background-position: center;
   background-size: cover;
-  border: 3px solid #0b1622;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  // border: 3px solid #0b1622;
   @include responsive(smartphone-portrait) {
     height: 100% !important;
     min-width: 220px !important;
@@ -123,7 +130,7 @@
 }
 
 .single-event-overlay {
-  background: linear-gradient(rgb(11 22 34), rgba(11, 22, 34, 0));
+  background: linear-gradient(#0b162200, #0b1622);
   width: 100%;
   height: 100%;
   position: absolute;
