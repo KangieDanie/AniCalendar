@@ -77,6 +77,8 @@ const getClassByEventSize = (events: any): string => {
   if (events) {
     if (events.length === 1) return styles["calendar-day-single-event"];
     else if (events.length === 2) return styles["calendar-day-two-event"];
+    else if (events.length === 3) return styles["calendar-day-three-event"];
+    else if (events.length === 4) return styles["calendar-day-three-event"];
   }
 
   return styles["calendar_day"];
