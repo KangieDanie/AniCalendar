@@ -1,11 +1,9 @@
-import * as React from "react";
-
 // Styles
 import styles from "@/styles/components/calendar/group.module.scss";
 
 // Modules
 import dayjs from "dayjs";
-import * as htmlToImage from "html-to-image";
+import { toPng } from "html-to-image";  
 import Sticky from "react-stickynode";
 import Button from "./button";
 
@@ -37,22 +35,23 @@ const Group: React.FC<ICalendarButtonsProps> = ({
   const handlerSetting = () => setSettingVisible(true);
   const isMobile = useCheckMobileScreen();
   const isTablet = useCheckTabletScreen();
+  
   const downloadImage = async (): Promise<void> => {
     setLoadingVisible(true);
     if (refElement) {
-      const dataUrl = await htmlToImage.toPng(refElement.current, {
-        fetchRequestInit: {
-          mode: "no-cors",
-        },
-      });
-
-      const link = document.createElement("a");
-      link.download = `calendar-${year}-${month}.png`;
-      link.href = dataUrl;
-      link.click();
+      try {
+        const dataUrl = await toPng(refElement.current, { cacheBust: true });
+        const link = document.createElement('a');
+        link.download = `calendar-${year}-${month}.png`;
+        link.href = dataUrl;
+        link.click();
+        link.click();
+      } catch (error) {
+        console.log(error);
+      }
       setLoadingVisible(false);
     }
-  };
+  }
 
   const previousMonth = (): void => {
     if (month === "1") {
@@ -167,20 +166,6 @@ const Group: React.FC<ICalendarButtonsProps> = ({
           />
         </div>
       </div>
-      {/* <div className={styles.legends}>
-        <div className={styles.legend}>
-          <svg viewBox="0 0 100 100" fill="orange" width={20} xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="50" />
-          </svg>
-          <span className={styles.desc}>Completed</span>
-        </div>
-        <div className={styles.legend}>
-          <svg viewBox="0 0 100 100" fill="purple" width={20} xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="50" />
-          </svg>
-          <span className={styles.desc}>First episode</span>
-        </div>
-      </div> */}
     </Sticky>
   );
 };

@@ -119,36 +119,6 @@ const SettingModal: React.FC<ISettingModalProps> = ({
             onChange={(checked) => setCompleted(checked)}
           ></Checkbox>
         </div>
-        {/* <hr className={styles.line} />
-        <div className={styles.container}>
-          <div>
-            <h4 className={styles.setting}>
-              Show upcoming schedule of anime &quot;In Progress&quot;.
-            </h4>
-          </div>
-          <Checkbox
-            color="secondary"
-            aria-label="Show upcoming episode"
-            labelColor="secondary"
-            isSelected={showUpcomingEp}
-            onChange={(checked) => setUpcomingEp(checked)}
-          ></Checkbox>
-        </div> */}
-        {/* <hr className={styles.line} />
-        <div className={styles.container}>
-          <div>
-            <h4 className={styles.setting}>
-              Show only the first episode/page of every anime/manga.
-            </h4>
-          </div>
-          <Checkbox
-            color="secondary"
-            labelColor="secondary"
-            aria-label=" Show only the first episode/page of every anime/manga."
-            isSelected={showFirstEp}
-            onChange={(checked) => setShowFirstEp(checked)}
-          ></Checkbox>
-        </div> */}
       </Modal.Body>
       <Modal.Footer
         css={{

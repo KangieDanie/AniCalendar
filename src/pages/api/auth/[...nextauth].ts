@@ -1,13 +1,13 @@
 // Next.js
 import { NextApiRequest, NextApiResponse } from "next";
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import { NextAuthOptionsCallback } from "types/next-auth";
 
 // GraphQL
 import { client } from "@/apolloClient";
 import { GET_CURRENT_USER } from "@/queries";
 
-export const authOptions: NextAuthOptionsCallback = (req, res) => {
+export const authOptions: NextAuthOptionsCallback = () => {
   return {
     debug: false,
     providers: [
@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptionsCallback = (req, res) => {
       },
     },
     events: {
-      async signOut({ token, session }) {
+      async signOut() {
         client.resetStore();
       },
     },
