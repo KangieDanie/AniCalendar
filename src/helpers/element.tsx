@@ -62,7 +62,7 @@ const createEvents = (data: any[], date: any) => {
   }
 };
 
-const createDaysCells = (data: any[], days: CalendarDay[]): JSX.Element[] => {
+const createDaysCells = (data: any, days: CalendarDay[]): JSX.Element[] => {
   return days.map((day, index) => {
     const events = data[day.date];
     const hasEvents = events && events.length > 0;
