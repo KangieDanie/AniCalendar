@@ -181,7 +181,8 @@ const SettingModal: React.FC<ISettingModalProps> = ({
             <div>
               <h4 className={styles.setting}>Show airing episodes.</h4>
               <p style={{ fontSize: "0.9em", marginTop: "5px", opacity: 0.8 }}>
-                Display upcoming episodes for anime you're currently watching
+                Display upcoming episodes for anime you&apos;re currently
+                watching
               </p>
             </div>
             <label className={styles.checkbox}>
