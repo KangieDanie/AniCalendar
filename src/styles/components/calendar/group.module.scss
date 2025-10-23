@@ -69,7 +69,7 @@
 }
 
 .sticky {
-  background-color: #151f2e;
+  background: linear-gradient(180deg, #151f2e 0%, #0f1621 100%);
   margin-top: 0;
   transform: translate3d(0px, 0, 0px) !important;
   z-index: 300 !important;
@@ -77,6 +77,8 @@
   left: 0 !important;
   width: 100% !important;
   padding: 1em 2.5em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(61, 180, 242, 0.2);
 
   @include responsive(smartphone-portrait) {
     padding: 0.2em;

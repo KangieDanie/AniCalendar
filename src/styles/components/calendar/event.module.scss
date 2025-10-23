@@ -3,53 +3,76 @@
 .event {
   background-image: linear-gradient(rgb(11 22 34), rgb(11 22 34 / 50%)),
     url("https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx139630-oc4l8OtJ4tRQ.jpg");
-  border-radius: 5px;
-  padding: 5px 15px;
+  border-radius: 10px;
+  padding: 10px;
   color: #fff;
-  font-weight: 500;
-  margin: 10px 0px;
+  font-weight: 600;
+  margin: 8px 0px;
   text-overflow: ellipsis;
   white-space: normal;
   overflow: hidden;
   width: 100%;
-  height: 60px;
-  font-size: 1em;
-  display: block;
-  transition: all ease-in-out 0.2s;
+  height: 180px;
+  font-size: 0.95em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all ease-in-out 0.3s;
   background-position: center;
   background-size: cover;
   border: 3px solid #0b1622;
   position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.4s ease-out backwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+
+    .overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(11, 22, 34, 0.3) 0%,
+        rgba(11, 22, 34, 0.85) 100%
+      );
+    }
+  }
+
   @include responsive(smartphone-portrait) {
-    height: 100% !important;
-    min-width: 220px !important;
-    margin: 10px 10px;
-    font-size: 0.9em;
-    width: 220px;
+    height: 120px !important;
+    min-height: 120px !important;
+    min-width: 200px !important;
+    margin: 8px;
+    font-size: 0.85em;
+    width: 200px;
+    animation: none;
   }
 
   @include responsive(smartphone-landscape) {
-    height: 100% !important;
-    min-width: 200px !important;
-    margin: 10px 10px;
-    font-size: 0.9em;
-    width: 220px;
+    height: 120px !important;
+    min-height: 120px !important;
+    min-width: 180px !important;
+    margin: 8px;
+    font-size: 0.85em;
+    width: 180px;
+    animation: none;
   }
 
   @include responsive(tablet) {
-    height: 100% !important;
-    min-width: 200px !important;
-    margin: 10px 10px;
-    font-size: 0.9em;
-    width: 220px;
+    height: 120px !important;
+    min-height: 120px !important;
+    min-width: 180px !important;
+    margin: 8px;
+    font-size: 0.85em;
+    width: 180px;
+    animation: none;
   }
-  // @include responsive(laptop) {
-  //   height: 100% !important;
-  //   min-width: 200px !important;
-  //   margin: 10px 10px;
-  //   font-size: 0.9em;
-  //   width: 220px;
-  // }
 }
 
 .background {
@@ -59,19 +82,103 @@
   left: 0;
   top: 0;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .overlay {
-  background: linear-gradient(rgb(11 22 34), rgb(11 22 34 / 70%));
+  background: linear-gradient(
+    180deg,
+    rgba(11, 22, 34, 0.4) 0%,
+    rgba(11, 22, 34, 0.8) 100%
+  );
   width: 100%;
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
   z-index: 15;
+  border-radius: 10px;
+  transition: all ease-in-out 0.3s;
+}
+
+.episodeBadge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(237, 47, 86, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65em;
+  font-weight: 700;
+  color: #fff;
+  z-index: 20;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.formatBadge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.6em;
+  font-weight: 700;
+  color: #fff;
+  z-index: 20;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.statusBadge {
+  position: absolute;
+  bottom: 45px;
+  right: 6px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background-color: #02a679;
+  font-size: 0.55em;
+  font-weight: 700;
+  color: #fff;
+  z-index: 20;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contentWrapper {
+  z-index: 16;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .anime {
   z-index: 16;
   position: relative;
+  font-size: 0.9em;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-top: 2px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

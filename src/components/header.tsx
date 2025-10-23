@@ -10,9 +10,6 @@ import { client } from "@/apolloClient";
 // Styles
 import styles from "@/styles/components/header.module.scss";
 
-// Modules
-import { Tooltip } from "@nextui-org/react";
-
 // Icons
 import {
   ArrowLeftOnRectangleIcon,
@@ -24,6 +21,19 @@ import Avatar from "./avatar";
 
 const Header: React.FC = () => {
   const { data: session } = useSession();
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const menuRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className={styles.nav}>
@@ -48,75 +58,55 @@ const Header: React.FC = () => {
       </div>
 
       {session?.user && (
-        <>
-          <div className={styles.container}>
-            {session.user.image && (
-              <>
-                <Tooltip
-                  placement="bottom"
-                  style={{ alignItems: "center", cursor: "pointer" }}
-                  css={{
-                    color: "#9fadbd",
-                    fontSize: "$sm",
-                    padding: "5px 10px",
-                    width: "150px",
-                    borderRadius: "5px",
-                    backgroundColor: "#0b1622",
-                    zIndex: "300",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                  offset={2}
-                  content={
-                    <div className={styles.menu}>
-                      <a
-                        href="https://github.com/KangieDanie/AniCalendar/issues/new"
-                        className={styles.item}
-                      >
-                        <ExclamationCircleIcon
-                          width={25}
-                          className="h-6 w-6 text-blue-500"
-                        />
-                        <span className={styles.desc}>Report a bug</span>
-                      </a>
-                      <a
-                        href="https://github.com/KangieDanie/AniCalendar"
-                        className={styles.item}
-                      >
-                        <LinkIcon
-                          width={25}
-                          className="h-6 w-6 text-blue-500"
-                        />
-                        <span className={styles.desc}>Github</span>
-                      </a>
-                      <a
-                        className={styles.item}
-                        onClick={() => {
-                          signOut({});
-                          client.resetStore();
-                        }}
-                      >
-                        <ArrowLeftOnRectangleIcon
-                          width={25}
-                          className="h-6 w-6 text-blue-500"
-                        />
-                        <span className={styles.desc}>Sign Out</span>
-                      </a>
-                    </div>
-                  }
-                  hideArrow
-                  shadow={false}
-                >
-                  <Avatar image={session.user.image.large} />
-                  <span className={styles.name}>
-                    <strong>{session.user.name}</strong>
-                  </span>
-                  <ChevronDownIcon width={16} className={styles.arrow} />
-                </Tooltip>
-              </>
-            )}
-          </div>
-        </>
+        <div className={styles.userContainer} ref={menuRef}>
+          {session.user.image && (
+            <>
+              <div 
+                className={styles.userButton}
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                <Avatar image={session.user.image.large} />
+                <span className={styles.name}>
+                  <strong>{session.user.name}</strong>
+                </span>
+                <ChevronDownIcon width={16} className={styles.arrow} />
+              </div>
+              
+              {menuOpen && (
+                <div className={styles.dropdownMenu}>
+                  <a
+                    href="https://github.com/KangieDanie/AniCalendar/issues/new"
+                    className={styles.menuItem}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExclamationCircleIcon width={20} />
+                    <span>Report a bug</span>
+                  </a>
+                  <a
+                    href="https://github.com/KangieDanie/AniCalendar"
+                    className={styles.menuItem}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LinkIcon width={20} />
+                    <span>Github</span>
+                  </a>
+                  <button
+                    className={styles.menuItem}
+                    onClick={() => {
+                      signOut({});
+                      client.resetStore();
+                    }}
+                  >
+                    <ArrowLeftOnRectangleIcon width={20} />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       )}
       {!session && (
         <>

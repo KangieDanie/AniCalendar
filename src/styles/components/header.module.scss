@@ -1,15 +1,19 @@
 @import "../mixins";
 
 .nav {
-  background-color: var(--header-background-color);
+  background: linear-gradient(180deg, #0a1420 0%, #0b1622 100%);
+  border-bottom: 1px solid rgba(61, 180, 242, 0.1);
   color: var(--foreground-text-color);
   height: 80px;
   width: 100%;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   padding: 2em 5em;
   align-items: center;
+  backdrop-filter: blur(10px);
 
   @include responsive(smartphone-portrait) {
     height: 70px;
@@ -51,27 +55,33 @@
 }
 
 .button {
-  background-color: var(--foreground-text-highlight);
-  padding: 15px;
-  width: 150px;
+  background: linear-gradient(135deg, #3db4f2 0%, #2a8ec5 100%);
+  color: white;
+  padding: 12px 24px;
+  min-width: 120px;
   border: none;
   font-weight: 700;
+  font-size: 0.95em;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   margin: 0 1em;
   text-align: center;
+  box-shadow: 0 4px 15px rgba(61, 180, 242, 0.3);
 
   &:hover {
-    transform: scale(1.1);
-    transition: all 0.6s ease;
-    -webkit-box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
-    -moz-box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
-    box-shadow: 3px 4px 20px 0px var(--foreground-text-highlight);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(61, 180, 242, 0.5);
+    background: linear-gradient(135deg, #2a8ec5 0%, #3db4f2 100%);
   }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
   @include responsive(smartphone-portrait) {
-    width: 120px;
-    padding: 10px;
+    min-width: 100px;
+    padding: 10px 20px;
   }
 }
 
@@ -124,4 +134,83 @@
 .name {
   color: #9fadbd;
   font-weight: 500;
+}
+
+.userContainer {
+  position: relative;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(61, 180, 242, 0.1);
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background-color: #151f2e;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(61, 180, 242, 0.1);
+  min-width: 200px;
+  padding: 8px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease-out;
+  
+  @include responsive(smartphone-portrait) {
+    right: -10px;
+  }
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  color: #9fadbd;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.95em;
+  
+  svg {
+    color: #3db4f2;
+    flex-shrink: 0;
+  }
+  
+  &:hover {
+    background-color: rgba(61, 180, 242, 0.1);
+    color: #fff;
+  }
+  
+  & + & {
+    margin-top: 4px;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

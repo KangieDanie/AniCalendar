@@ -3,18 +3,18 @@ import styles from "@/styles/components/calendar/group.module.scss";
 
 // Modules
 import dayjs from "dayjs";
-import { toPng } from "html-to-image";  
+import { toPng } from "html-to-image";
 import Sticky from "react-stickynode";
 import Button from "./button";
 
 // Icons
 import {
   CameraIcon,
-  Cog8ToothIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Cog8ToothIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
@@ -35,13 +35,13 @@ const Group: React.FC<ICalendarButtonsProps> = ({
   const handlerSetting = () => setSettingVisible(true);
   const isMobile = useCheckMobileScreen();
   const isTablet = useCheckTabletScreen();
-  
+
   const downloadImage = async (): Promise<void> => {
     setLoadingVisible(true);
     if (refElement) {
       try {
         const dataUrl = await toPng(refElement.current, { cacheBust: true });
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.download = `calendar-${year}-${month}.png`;
         link.href = dataUrl;
         link.click();
@@ -51,7 +51,7 @@ const Group: React.FC<ICalendarButtonsProps> = ({
       }
       setLoadingVisible(false);
     }
-  }
+  };
 
   const previousMonth = (): void => {
     if (month === "1") {
@@ -104,15 +104,6 @@ const Group: React.FC<ICalendarButtonsProps> = ({
             method={() => handlerLegend()}
             visible
           />
-
-          {(!isMobile || !isTablet) && (
-            <Button
-              content={"Next Month"}
-              icon={<ChevronRightIcon width={25} />}
-              method={() => nextMonth()}
-              visible={false}
-            />
-          )}
         </div>
 
         <div className={styles.sub}>

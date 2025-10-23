@@ -1,8 +1,8 @@
 // Next.js
+import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
-import type { Session } from "next-auth";
-import { Overpass } from "@next/font/google";
+import { Overpass } from "next/font/google";
 
 // GraphQL
 import { ApolloProvider } from "@apollo/client";

@@ -9,6 +9,7 @@ type Activity = {
   banner: string;
   coverImage: CoverImage;
   format: string;
+  isAiring?: boolean;
 };
 
 type CalendarDay = {
@@ -22,4 +23,12 @@ type CoverImage = {
   large: string;
   medium: string;
   color: string;
+};
+
+type CardSizeMode = "auto" | "manual";
+type CardSize = "small" | "medium" | "large";
+
+type CardSettings = {
+  sizeMode: CardSizeMode;
+  manualSize: CardSize;
 };
